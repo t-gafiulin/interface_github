@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { fetchIssues } from '../AC';
 
 
-export default class Search extends Component {
+class Search extends Component {
     constructor(props){
         super(props);
 
@@ -17,15 +19,26 @@ export default class Search extends Component {
     }
 
     handleClick(){
-        console.log(this.state.login, this.state.repositoryName);
+        this.props.fetchIssues(this.state.login, this.state.repositoryName);
         this.setState({login: '', repositoryName: ''});
     }
 
     render(){
+        const issues = this.props.issues.map(child => 
+            <p>{child.number} {child.title} {child.created_at}</p>
+        )
         return <div>
             <input value={this.state.login} onChange={this.handleChange.bind(this, 'login')} />
             <input value={this.state.repositoryName} onChange={this.handleChange.bind(this, 'repositoryName')} />
             <button onClick={this.handleClick.bind(this)} >Search</button>
+            <p>{issues}</p>
         </div>;
     }
 }
+
+export default connect(
+    state => ({
+        issues: state.issue.issues
+    }),
+    { fetchIssues }
+)(Search);
