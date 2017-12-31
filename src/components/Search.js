@@ -28,8 +28,14 @@ class Search extends Component {
             <p>{child.number} {child.title} {child.created_at}</p>
         )
         return <div>
-            <input value={this.state.login} onChange={this.handleChange.bind(this, 'login')} />
-            <input value={this.state.repositoryName} onChange={this.handleChange.bind(this, 'repositoryName')} />
+            <input 
+                value={this.state.login} 
+                onChange={this.handleChange.bind(this, 'login')}
+                placeholder='Login for Github' />
+            <input 
+                value={this.state.repositoryName} 
+                onChange={this.handleChange.bind(this, 'repositoryName')} 
+                placeholder='Repository name'/>
             <button onClick={this.handleClick.bind(this)} >Search</button>
             <p>{issues}</p>
         </div>;
