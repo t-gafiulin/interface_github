@@ -1,18 +1,23 @@
 import { LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS } from '../constants/index';
 
-function receiveIssues(json){
+function receiveIssues(json, login, repositoryName, page){
     return {
         type: LOAD_ISSUES_SUCCESS,
-        issues: json
+        issues: json,
+        login: login,
+        repositoryName: repositoryName,
+        page: page,
     }
 }
 
-
-export function fetchIssues(login, repositoryName){
+export function fetchIssues(login, repositoryName, page){
     return function(dispatch){
-        return fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues`)
+        console.log(login, repositoryName, page);
+        return fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues?page=${page}`)
         .then( response => response.json())
-        .then( json => dispatch(receiveIssues(json)))
-        //.catch( error => console.log(error.message))
+        .then( 
+            json => {
+                dispatch(receiveIssues(json, login, repositoryName, page))
+            })
     }
 }

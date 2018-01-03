@@ -18,9 +18,17 @@ class Search extends Component {
         this.setState({[stateName]: event.target.value});
     }
 
-    handleClick(){
-        this.props.fetchIssues(this.state.login, this.state.repositoryName);
+    handleClickSearch(){
+        this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page);
         this.setState({login: '', repositoryName: ''});
+    }
+
+    handleClickChangePage(nextOrPrevButton){
+        if(nextOrPrevButton === 'next') {
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1);
+        } else {
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1);
+        }
     }
 
     render(){
@@ -36,7 +44,11 @@ class Search extends Component {
                 value={this.state.repositoryName} 
                 onChange={this.handleChange.bind(this, 'repositoryName')} 
                 placeholder='Repository name'/>
-            <button onClick={this.handleClick.bind(this)} >Search</button>
+            <button onClick={this.handleClickSearch.bind(this)} >Search</button>
+            <br />
+            <button onClick={this.handleClickChangePage.bind(this, 'prev')}>Prev</button>
+                {this.props.page}
+            <button onClick={this.handleClickChangePage.bind(this, 'next')}>Next</button>
             <p>{issues}</p>
         </div>;
     }
@@ -44,7 +56,10 @@ class Search extends Component {
 
 export default connect(
     state => ({
-        issues: state.issue.issues
+        issues: state.issue.issues,
+        page: state.issue.page,
+        login: state.issue.login,
+        repositoryName: state.issue.repositoryName,
     }),
     { fetchIssues }
 )(Search);
