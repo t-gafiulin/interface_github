@@ -9,7 +9,8 @@ class Search extends Component {
 
         this.state = {
             login: '',
-            repositoryName: ''
+            repositoryName: '',
+            perPage: '30',
         }
     
     }
@@ -19,13 +20,16 @@ class Search extends Component {
     }
 
     handleClick(nextOrPrevButton){
+        console.log(this.state.perPage)
         if(nextOrPrevButton === 'next') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1);
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1, this.state.perPage);
         } else if (nextOrPrevButton === 'prev') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1);
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1, this.state.perPage);
+        } else if (nextOrPrevButton === 'perPage') {
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page, this.state.perPage);
         } else {
-            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page);
-        this.setState({login: '', repositoryName: ''});
+            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
+            this.setState({login: '', repositoryName: ''});
         }
     }
 
@@ -42,11 +46,25 @@ class Search extends Component {
                 value={this.state.repositoryName} 
                 onChange={this.handleChange.bind(this, 'repositoryName')} 
                 placeholder='Repository name'/>
-            <button onClick={this.handleClick.bind(this)} >Search</button>
-            <br />
+            <button onClick={this.handleClick.bind(this)}>Search</button>
+            <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
             <button onClick={this.handleClick.bind(this, 'prev')}>Prev</button>
                 {this.props.page}
             <button onClick={this.handleClick.bind(this, 'next')}>Next</button>
+
+            <select 
+                value={this.props.perPage} 
+                onChange={this.handleChange.bind(this, 'perPage')} 
+                onClick={this.handleClick.bind(this, 'perPage')}
+            >
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+
             <p>{issues}</p>
         </div>;
     }
@@ -58,6 +76,7 @@ export default connect(
         page: state.issue.page,
         login: state.issue.login,
         repositoryName: state.issue.repositoryName,
+        perPage: state.issue.perPage,
     }),
     { fetchIssues }
 )(Search);
