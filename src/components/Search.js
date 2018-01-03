@@ -18,16 +18,14 @@ class Search extends Component {
         this.setState({[stateName]: event.target.value});
     }
 
-    handleClickSearch(){
-        this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page);
-        this.setState({login: '', repositoryName: ''});
-    }
-
-    handleClickChangePage(nextOrPrevButton){
+    handleClick(nextOrPrevButton){
         if(nextOrPrevButton === 'next') {
             this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1);
-        } else {
+        } else if (nextOrPrevButton === 'prev') {
             this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1);
+        } else {
+            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page);
+        this.setState({login: '', repositoryName: ''});
         }
     }
 
@@ -44,11 +42,11 @@ class Search extends Component {
                 value={this.state.repositoryName} 
                 onChange={this.handleChange.bind(this, 'repositoryName')} 
                 placeholder='Repository name'/>
-            <button onClick={this.handleClickSearch.bind(this)} >Search</button>
+            <button onClick={this.handleClick.bind(this)} >Search</button>
             <br />
-            <button onClick={this.handleClickChangePage.bind(this, 'prev')}>Prev</button>
+            <button onClick={this.handleClick.bind(this, 'prev')}>Prev</button>
                 {this.props.page}
-            <button onClick={this.handleClickChangePage.bind(this, 'next')}>Next</button>
+            <button onClick={this.handleClick.bind(this, 'next')}>Next</button>
             <p>{issues}</p>
         </div>;
     }
