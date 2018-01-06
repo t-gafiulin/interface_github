@@ -36,6 +36,9 @@ class Search extends Component {
         const issues = this.props.issues.map(child => 
             <p>{child.number} {child.title} {child.created_at}</p>
         )
+
+
+
         return <div>
             <input 
                 value={this.state.login} 
@@ -47,9 +50,10 @@ class Search extends Component {
                 placeholder='Repository name'/>
             <button onClick={this.handleClick.bind(this)}>Search</button>
             <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
-            <button onClick={this.handleClick.bind(this, 'prev')}>Prev</button>
+
+            <button onClick={this.handleClick.bind(this, 'prev')} disabled={this.props.page === 1}>Prev</button>
                 {this.props.page}
-            <button onClick={this.handleClick.bind(this, 'next')}>Next</button>
+            <button onClick={this.handleClick.bind(this, 'next')} disabled={issues.length < this.props.perPage}>Next</button>
 
             <select 
                 value={this.props.perPage} 
