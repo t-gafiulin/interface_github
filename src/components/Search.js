@@ -25,7 +25,7 @@ class Search extends Component {
         } else if (nextOrPrevButton === 'prev') {
             this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1, this.state.perPage);
         } else if (nextOrPrevButton === 'perPage') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page, this.state.perPage);
+            this.props.fetchIssues(this.props.login, this.props.repositoryName, 1, this.state.perPage);
         } else {
             this.setState({login: '', repositoryName: ''});
             this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
