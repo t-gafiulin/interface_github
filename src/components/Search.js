@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchIssues } from '../AC';
-
+import Loader from './LoadingIndicator';
 
 class Search extends Component {
     constructor(props){
@@ -20,7 +20,6 @@ class Search extends Component {
     }
 
     handleClick(nextOrPrevButton){
-        console.log(this.state.perPage)
         if(nextOrPrevButton === 'next') {
             this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1, this.state.perPage);
         } else if (nextOrPrevButton === 'prev') {
@@ -64,8 +63,7 @@ class Search extends Component {
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
-
-            <p>{issues}</p>
+            {this.props.loading ? <Loader /> : <p>{issues}</p> }
         </div>;
     }
 }
@@ -77,6 +75,7 @@ export default connect(
         login: state.issue.login,
         repositoryName: state.issue.repositoryName,
         perPage: state.issue.perPage,
+        loading: state.issue.loading,
     }),
     { fetchIssues }
 )(Search);

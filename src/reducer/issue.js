@@ -8,6 +8,7 @@ const initialState = {
     repositoryName: '',
     page: 1,
     perPage: 30,
+    loading: false,
 }
 
 export default function issue(state = initialState, action){
@@ -21,7 +22,13 @@ export default function issue(state = initialState, action){
                 repositoryName: repositoryName,
                 page: page,
                 perPage: perPage,
+                loading: false,
             } 
+        case LOAD_ISSUES_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
         default:
             return state;
     }
