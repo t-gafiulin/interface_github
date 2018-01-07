@@ -9,6 +9,7 @@ const initialState = {
     page: 1,
     perPage: 30,
     loading: false,
+    error: false,
 }
 
 export default function issue(state = initialState, action){
@@ -23,11 +24,19 @@ export default function issue(state = initialState, action){
                 page: page,
                 perPage: perPage,
                 loading: false,
+                error: false,
             } 
         case LOAD_ISSUES_REQUEST:
             return {
                 ...state,
                 loading: true,
+                error: false,
+            }
+        case LOAD_ISSUES_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: true,
             }
         default:
             return state;

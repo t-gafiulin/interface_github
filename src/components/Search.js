@@ -36,9 +36,7 @@ class Search extends Component {
         const issues = this.props.issues.map(child => 
             <p>{child.number} {child.title} {child.created_at}</p>
         )
-
-
-
+        let data = this.props.loading ? <Loader /> : (this.props.error ? <p>Not found</p> : issues);
         return <div>
             <input 
                 value={this.state.login} 
@@ -67,7 +65,7 @@ class Search extends Component {
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
-            {this.props.loading ? <Loader /> : <p>{issues}</p> }
+            {data}
         </div>;
     }
 }
@@ -80,6 +78,7 @@ export default connect(
         repositoryName: state.issue.repositoryName,
         perPage: state.issue.perPage,
         loading: state.issue.loading,
+        error: state.issue.error,
     }),
     { fetchIssues }
 )(Search);
