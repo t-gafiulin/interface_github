@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchIssues } from '../AC';
 import Loader from './LoadingIndicator';
+import Issue from './Issue';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
     constructor(props){
@@ -34,7 +36,7 @@ class Search extends Component {
 
     render(){
         const issues = this.props.issues.map(child => 
-            <p>{child.number} {child.title} {child.created_at}</p>
+            <Link to='/issue'><button>{child.number} {child.title} {child.created_at}</button></Link>
         )
         let data = this.props.loading ? <Loader /> : (this.props.error ? <p>Not found</p> : issues);
         return <div>
@@ -47,6 +49,7 @@ class Search extends Component {
                 onChange={this.handleChange.bind(this, 'repositoryName')} 
                 placeholder='Repository name'/>
             <button onClick={this.handleClick.bind(this)}>Search</button>
+            
             <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
 
             <button onClick={this.handleClick.bind(this, 'prev')} disabled={this.props.page === 1}>Prev</button>
