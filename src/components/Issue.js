@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 
-export default class Issue extends Component {
-
+class Issue extends Component {
+    constructor(props){
+        super(props);
+    }
 
     render(){
+        console.log(this.props.issue)
         return <div>
-                Hello. I'm Issue.
+                Hello, Issue!
             </div>
     }
 }
+
+export default connect(
+    state => ({
+        issue: state.issue.issue,
+    })  
+)(Issue);

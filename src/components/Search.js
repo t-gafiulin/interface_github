@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchIssues } from '../AC';
+import { fetchIssues, fetchIssue } from '../AC';
 import Loader from './LoadingIndicator';
 import Issue from './Issue';
 import { Link } from 'react-router-dom';
@@ -34,9 +34,14 @@ class Search extends Component {
         }
     }
 
+    handleClickIssue(number){
+        const { fetchIssue, login, repositoryName } = this.props;
+        fetchIssue(login, repositoryName, number);
+    }
+
     render(){
         const issues = this.props.issues.map(child => 
-            <Link to='/issue'><button>{child.number} {child.title} {child.created_at}</button></Link>
+            <Link to='/issue'><button onClick={this.handleClickIssue.bind(this, child.number)}>{child.number} {child.title} {child.created_at}</button></Link>
         )
         let data = this.props.loading ? <Loader /> : (this.props.error ? <p>Not found</p> : issues);
         return <div>
@@ -83,5 +88,5 @@ export default connect(
         loading: state.issue.loading,
         error: state.issue.error,
     }),
-    { fetchIssues }
+    { fetchIssues, fetchIssue }
 )(Search);
