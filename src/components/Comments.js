@@ -1,27 +1,25 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Comments from './Comments'
 
 
-class Issue extends Component {
+class Comments extends Component {
     constructor(props){
         super(props);
     }
 
     render(){
+        const comments = this.props.comments.map((elem, index) => {
+            return <div>{index} {elem.body}</div>
+        })
         return <div>
-            Hello, Issue!
-            <Link to="/"><button>Back to Search</button></Link>
-            <p />
-            <Comments />
+            {comments}
         </div>
     }
 }
 
 export default connect(
     state => ({
-        issue: state.issue.issue,
         comments: state.issue.comments,
     })  
-)(Issue);
+)(Comments);

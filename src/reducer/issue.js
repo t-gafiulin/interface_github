@@ -1,6 +1,6 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS,
+    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, 
 } from '../constants/index';
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
     loading: false,
     error: false,
     issue: null,
+    comments: [],
 }
 
 export default function issue(state = initialState, action){
@@ -44,6 +45,11 @@ export default function issue(state = initialState, action){
             return {
                 ...state,
                 issue: action.issue,
+            }
+        case LOAD_COMMENTS_SUCCESS:
+            return {
+                ...state,
+                comments: action.comments,
             }
         default:
             return state;

@@ -1,6 +1,6 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS,
+    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS,
 } from '../constants/index';
 
 function receiveIssues(json, login, repositoryName, page, perPage){
@@ -18,6 +18,13 @@ function receiveIssue( json ){
     return {
         type: LOAD_ISSUE_SUCCESS,
         issue: json,
+    }
+}
+
+function receiveComment ( json ) {
+    return {
+        type: LOAD_COMMENTS_SUCCESS,
+        comments: json,
     }
 }
 
@@ -45,21 +52,20 @@ export function fetchIssues(login, repositoryName, page, perPage){
 export function fetchIssue(login, repositoryName, numberIssue){
     return function(dispatch){
 
-        return Promise.all([fetch([
-            `https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}`,
+        return Promise.all([
+            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}`)
+            .then( response => response.json())
+            .then( json => {
+                dispatch(receiveIssue(json)) 
+            })
+            .catch (error => console.log(error)),
+
+            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}/comments`)
+            .then( response => response.json())
+            .then( json => {
+                dispatch(receiveComment(json)) 
+            })
+            .catch (error => console.log(error))
         ])
-        .then( response => response.json())
-        .then( json => {;
-            dispatch(receiveIssue(json)) 
-        })
-        .catch (error => console.log(error)),
-        fetch([
-            `https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}/comments`
-        ])
-        .then( response => response.json())
-        .then( json => {
-            dispatch(receiveIssue(json)) 
-        })
-        .catch (error => console.log(error))])
     }
 }
