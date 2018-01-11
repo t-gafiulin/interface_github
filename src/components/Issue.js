@@ -11,11 +11,12 @@ class Issue extends Component {
 
     render(){
         const src = this.props.issue ? this.props.issue.user.avatar_url : "";
-
+        const author_url = this.props.issue ? this.props.issue.user.html_url : ""
 
         return <div>
             <Link to="/"><button>Back to Search</button></Link>
             <img src={src} alt="" width='300px' height='300px'/>
+            <a href={author_url}>Github Profile</a>
             <p />
             <Comments />
         </div>
