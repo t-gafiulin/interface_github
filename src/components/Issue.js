@@ -10,9 +10,12 @@ class Issue extends Component {
     }
 
     render(){
+        const src = this.props.issue ? this.props.issue.user.avatar_url : "";
+
+
         return <div>
-            Hello, Issue!
             <Link to="/"><button>Back to Search</button></Link>
+            <img src={src} alt="" width='300px' height='300px'/>
             <p />
             <Comments />
         </div>
