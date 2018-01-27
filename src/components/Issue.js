@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Comments from './Comments'
+import Comment from './Comment'
 import Showdown from 'showdown';
 import '../resource/Issue.css';
 import Loader from './LoadingIndicator';
@@ -52,6 +52,13 @@ class Issue extends Component {
                         <div class='issue-header-meta__date'>opened this issue {created_at} </div>
                         <div class='issue-header-meta__comments'> - {comments}</div>
                     </div>
+                    <Comment 
+                        url={author_url} 
+                        login={author_name} 
+                        date={created_at} 
+                        avatar_url={src}
+                        text={this.bodyParser(body_issue)}
+                    />
                 </div>
             </div>
             // <div class='container'>

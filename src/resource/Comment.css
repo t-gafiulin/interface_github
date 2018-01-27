@@ -1,0 +1,40 @@
+.comment{
+    padding-left: 60px;
+}
+
+.comment__img{
+    height: 44px;
+    width: 44px;
+    margin-left: -60px;
+    float: left;
+}
+
+.comment__text{
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+}
+
+.comment__header{
+    background-color: #f6f8fa;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 1px solid #d1d5da;
+    padding: 10px 15px;
+}
+
+.comment__author{
+    font-weight: bold;
+    color: #586069;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.comment__date{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.comment__body{
+    padding-left: 15px;
+    padding-right: 15px;
+}
