@@ -19,10 +19,7 @@ class Issue extends Component {
     }
 
     render(){
-        let src;
-        let author_url;
-        let author_name;
-        let body_issue;
+        let src, author_url, author_name, body_issue, comments, created_at;
 
         const data = <Loader />; 
         const { loading, issue } = this.props;
@@ -32,6 +29,8 @@ class Issue extends Component {
             author_url = issue.user.html_url;
             author_name = issue.user.login;
             body_issue = issue.body;
+            comments = issue.comments === 1 ? issue.comments + ' comment' : issue.comments + ' comments';
+            created_at = issue.created_at.split('T').join(' ').slice(0, -1);
         }
 
         
@@ -48,10 +47,10 @@ class Issue extends Component {
                         </h1>
                     </div>
                     <div class='issue-header-meta'>
-                        <div class='issue-header-meta__state'></div>
-                        <div class='issue-header-meta__author'></div>
-                        <div class='issue-header-meta__date'></div>
-                        <div class='issue-header-meta__comments'></div>
+                        <div class='issue-header-meta__state'>{issue.state}</div>
+                        <a class='issue-header-meta__author' href={author_url}>{author_name}</a>
+                        <div class='issue-header-meta__date'>opened this issue {created_at} </div>
+                        <div class='issue-header-meta__comments'> - {comments}</div>
                     </div>
                 </div>
             </div>

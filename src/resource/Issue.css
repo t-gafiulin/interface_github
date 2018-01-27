@@ -28,6 +28,44 @@
     letter-spacing: -1px;
 }
 
+.issue-header-meta{
+    margin-bottom: 15px;
+    padding-top: 4px;
+}
+
+.issue-header-meta__state{
+    background-color: #2cbe4e;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 8px;
+    padding-top: 0px;
+    margin-right: 8px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.issue-header-meta__state::first-letter{
+    font-size: 150%;    
+}
+
+.issue-header-meta__author{
+    font-weight: bold;
+    color: #586069;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.issue-header-meta__date{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.issue-header-meta__comments{
+    display: inline-block;
+}
+
+
+
 
 
 .clear {
