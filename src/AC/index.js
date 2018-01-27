@@ -1,6 +1,6 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS,
+    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST,
 } from '../constants/index';
 
 function receiveIssues(json, login, repositoryName, page, perPage){
@@ -51,7 +51,10 @@ export function fetchIssues(login, repositoryName, page, perPage){
 
 export function fetchIssue(login, repositoryName, numberIssue){
     return function(dispatch){
-
+        dispatch({
+            type: LOAD_ISSUE_REQUEST,
+        });
+        
         return Promise.all([
             fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}`)
             .then( response => response.json())

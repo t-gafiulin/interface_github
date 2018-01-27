@@ -22,15 +22,17 @@ class Search extends Component {
     }
 
     handleClick(nextOrPrevButton){
+        const {login, repositoryName, page, perPage} = this.props;
         if(nextOrPrevButton === 'next') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page + 1, this.state.perPage);
+            this.props.fetchIssues(login, repositoryName, page + 1, this.state.perPage);
         } else if (nextOrPrevButton === 'prev') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, this.props.page - 1, this.state.perPage);
+            this.props.fetchIssues(login, repositoryName, page - 1, this.state.perPage);
         } else if (nextOrPrevButton === 'perPage') {
-            this.props.fetchIssues(this.props.login, this.props.repositoryName, 1, this.state.perPage);
+            this.props.fetchIssues(login, repositoryName, 1, this.state.perPage);
         } else {
-            this.setState({login: '', repositoryName: ''});
-            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
+            //this.setState({login: '', repositoryName: ''});
+            //this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
+            this.props.fetchIssues(login, repositoryName, page, this.state.perPage);
         }
     }
 
@@ -41,7 +43,7 @@ class Search extends Component {
 
     render(){
         const issues = this.props.issues.map(child => 
-            <Link to='/issue'><button onClick={this.handleClickIssue.bind(this, child.number)}>{child.number} {child.title} {child.created_at}</button></Link>
+            <Link to='/issue'><p><button onClick={this.handleClickIssue.bind(this, child.number)}>{child.number} {child.title} {child.created_at}</button></p></Link>
         )
         let data = this.props.loading ? <Loader /> : (this.props.error ? <p>Not found</p> : issues);
         return <div>

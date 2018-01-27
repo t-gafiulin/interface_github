@@ -1,0 +1,42 @@
+.issue-page{
+    padding: 20px;
+    width: 100%;
+}
+
+.back-button{
+    float: right;
+    margin-right: 20px;
+}
+
+.user{
+    width: 200px;
+    float: left;
+}
+
+.user__image{
+    width: 100%;
+    height: 200px;
+}
+
+.user__link{
+    text-decoration: none;
+}
+
+.user__github-button{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.issue-info{
+    width: 600px;
+    float: right;
+}
+
+.issue-body{
+    display: block;
+}
+
+.clear {
+    clear: left; /* Отмена обтекания */
+}
