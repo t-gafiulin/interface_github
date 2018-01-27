@@ -1,41 +1,34 @@
-.issue-page{
-    padding: 20px;
-    width: 100%;
-}
-
-.back-button{
-    float: right;
-    margin-right: 20px;
-}
-
-.user{
-    width: 200px;
-    float: left;
-}
-
-.user__image{
-    width: 100%;
-    height: 200px;
-}
-
-.user__link{
-    text-decoration: none;
-}
-
-.user__github-button{
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-}
-
-.issue-info{
-    width: 600px;
-    float: right;
+.container{
+    width: 1020px;
 }
 
 .issue-body{
-    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
 }
+
+.issue-header-show__button{
+    float: right;
+    margin-top: 3px;
+}
+
+.issue-header-show__title{
+    margin-right: 150px;
+    font-weight: normal;
+    line-height: 1.125;
+}
+
+.issue-header-show__text-header{
+
+}
+
+.issue-header-show__number{
+    font-weight: 300;
+    color: #a3aab1;
+    letter-spacing: -1px;
+}
+
+
 
 .clear {
     clear: left; /* Отмена обтекания */
