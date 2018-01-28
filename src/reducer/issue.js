@@ -8,7 +8,7 @@ const initialState = {
     login: 'facebook',
     repositoryName: 'react',
     page: 1,
-    perPage: 30,
+    perPage: 1,
     loading: false,
     error: false,
     issue: null,

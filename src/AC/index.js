@@ -34,7 +34,7 @@ export function fetchIssues(login, repositoryName, page, perPage){
             type: LOAD_ISSUES_REQUEST,
         });
 
-        return fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues?page=${page}&per_page=${perPage}`)
+        return fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues?page=${page}&per_page=${perPage}&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
         .then( response => response.json())
         .then( 
             json => {
@@ -56,14 +56,14 @@ export function fetchIssue(login, repositoryName, numberIssue){
         });
         
         return Promise.all([
-            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}`)
+            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}?&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
             .then( response => response.json())
             .then( json => {
                 dispatch(receiveIssue(json)) 
             })
             .catch (error => console.log(error)),
 
-            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}/comments`)
+            fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}/comments?&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
             .then( response => response.json())
             .then( json => {
                 dispatch(receiveComment(json)) 

@@ -37,6 +37,8 @@ class Issue extends Component {
                     {elem.name}
                 </div>
             })
+
+            
         }
         
         const comments = this.props.comments.map((elem) => {

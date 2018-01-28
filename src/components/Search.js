@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { fetchIssues, fetchIssue } from '../AC';
 import Loader from './LoadingIndicator';
 import Issue from './Issue';
+import IssuesItem from './IssuesItem'
 import { Link } from 'react-router-dom';
 
 class Search extends Component {
     constructor(props){
         super(props);
+
+        //this.handleClickIssue = this.handleClickIssue.bind(this);
 
         this.state = {
             login: '',
@@ -42,10 +45,23 @@ class Search extends Component {
     }
 
     render(){
-        const issues = this.props.issues.map(child => 
-            <Link to='/issue'><p><button onClick={this.handleClickIssue.bind(this, child.number)}>{child.number} {child.title} {child.created_at}</button></p></Link>
+        const issues = this.props.issues.map((child, index) => 
+            <IssuesItem 
+                title={child.title}
+                number={child.number}
+                date={child.created_at}
+                login={child.user.login}
+                url={child.user.html_url}
+                labels={child.labels}
+                comments_amount={child.comments}
+                handleClick={this.handleClickIssue.bind(this)}
+            />
         )
-        let data = this.props.loading ? <Loader /> : (this.props.error ? <p>Not found</p> : issues);
+
+        let data = this.props.loading ? 
+            <Loader /> : (this.props.error ? 
+                <p>Not found</p> : <div class='container'>{issues}</div>);
+                
         return <div>
             <input 
                 value={this.state.login} 
