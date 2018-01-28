@@ -37,4 +37,5 @@
 .comment__body{
     padding-left: 15px;
     padding-right: 15px;
+    /* overflow-y: scroll; */
 }

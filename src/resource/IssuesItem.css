@@ -1,43 +1,73 @@
-.issue-item{
-
+a{
+    text-decoration: none;
+    color: black;
 }
 
-.issue-item__link{
-    
+a:hover{
+    text-decoration: none;
+    color: blue;
+}
+
+.issue-item{
+    border-top: 1px solid rgb(225, 228, 232);
+    padding: 10px;
+    display: block;
+}
+
+.issue-item:hover{
+    background-color: #f6f8fa;
+}
+
+.issue-item__text{
+    display: inline-block;
+    width: 900px;
 }
 
 .issue-item__button{
-    
+    display: inline-block;
+}
+
+.issue-item__link{
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .issue-item__header{
-    
 }
 
 .issue-item__meta{
-
+    color: #586069;
+    font-size: 12px;
+    line-height: 15px;
 }
 
 .issue-item__number{
+    display:inline-block;
     
 }
 
 .issue-item__date{
-    
+    display:inline-block;
+    margin-left: 5px;
 }
 
 .issue-item__login{
-    
+    display:inline-block;
+    margin-left: 5px;
 }
 
 .issue-item__comments{
-
+    float: right;
+    display: inline-block;
 }
 
 .issue-item__labels{
-
+    display: inline-block;
 }
 
 .issue-item__label{
-    
+    font-size: 12px;
+    padding: 3px 4px;
+    display: inline-block;
+    margin-left: 5px;
 }

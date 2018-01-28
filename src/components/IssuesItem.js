@@ -29,20 +29,22 @@ export default class IssuesItem extends Component {
         })
 
         return <div class='issue-item'>
-            <Link class='issue-item__link' to='/issue'>
-                <div class='issue-item__button' onClick={this.handleClick.bind(this)}>
-                    <h4 class='issue-item__header'>{title}</h4>
-                    <div class='issue-item__meta'>
-                        <div class='issue-item__number'>#{number}</div>
-                        <div class='issue-item__date'>{this.dateParser(date)}</div>
-                        <a class='issue-item__login' href={url}>{login}</a>
-                        <div class='issue-item__comments'>{comments_amount}</div>
+            <div class='issue-item__text'>
+                <div class='issue-item__header'>
+                    <div class='issue-item__button' onClick={this.handleClick.bind(this)}>
+                        <Link class='issue-item__link' to='/issue'>{title}</Link>  
                     </div>
                     <div class='issue-item__labels'>
                         {labels_block}
                     </div>
                 </div>
-            </Link>
+                <div class='issue-item__meta'>
+                    <div class='issue-item__number'>#{number}</div>
+                    <div class='issue-item__date'>opened {this.dateParser(date)} by</div>
+                    <a class='issue-item__login' href={url}>{login}</a>
+                </div>
+            </div>
+            <div class='issue-item__comments'>{comments_amount}</div>
         </div>
     }
 }

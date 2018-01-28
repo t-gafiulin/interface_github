@@ -88,8 +88,3 @@
 .issue-labels__label{
     padding: 10px;
 }
-
-
-.clear {
-    clear: left; /* Отмена обтекания */
-}

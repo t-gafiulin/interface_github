@@ -5,6 +5,7 @@ import Loader from './LoadingIndicator';
 import Issue from './Issue';
 import IssuesItem from './IssuesItem'
 import { Link } from 'react-router-dom';
+import '../resource/Search.css';
 
 class Search extends Component {
     constructor(props){
@@ -33,9 +34,8 @@ class Search extends Component {
         } else if (nextOrPrevButton === 'perPage') {
             this.props.fetchIssues(login, repositoryName, 1, this.state.perPage);
         } else {
-            //this.setState({login: '', repositoryName: ''});
-            //this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
-            this.props.fetchIssues(login, repositoryName, page, this.state.perPage);
+            this.setState({login: '', repositoryName: ''});
+            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
         }
     }
 
@@ -60,9 +60,9 @@ class Search extends Component {
 
         let data = this.props.loading ? 
             <Loader /> : (this.props.error ? 
-                <p>Not found</p> : <div class='container'>{issues}</div>);
+                <p>Not found</p> : <div class='list-issue'><div class='list-issue-header'>Issues</div>{issues}</div>);
                 
-        return <div>
+        return <div class='container'>
             <input 
                 value={this.state.login} 
                 onChange={this.handleChange.bind(this, 'login')}
@@ -75,11 +75,14 @@ class Search extends Component {
             
             <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
 
-            <button onClick={this.handleClick.bind(this, 'prev')} disabled={this.props.page === 1}>Prev</button>
-                {this.props.page}
-            <button onClick={this.handleClick.bind(this, 'next')} disabled={issues.length < this.props.perPage}>Next</button>
+            <div class='pagination'>
+                <button class='pagination__prev' onClick={this.handleClick.bind(this, 'prev')} disabled={this.props.page === 1}>Prev</button>
+                    <span class='pagination__page'>{this.props.page}</span>
+                <button class='pagination__next' onClick={this.handleClick.bind(this, 'next')} disabled={issues.length < this.props.perPage}>Next</button>
+            </div>
 
             <select 
+                class='select-block'
                 value={this.props.perPage} 
                 onChange={this.handleChange.bind(this, 'perPage')} 
                 onClick={this.handleClick.bind(this, 'perPage')}
