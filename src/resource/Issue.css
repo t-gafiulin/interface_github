@@ -1,8 +1,5 @@
-.container{
-    width: 1020px;
-}
-
 .issue-body{
+    width: 100%;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -10,6 +7,7 @@
 .issue-header-show__button{
     float: right;
     margin-top: 3px;
+    margin-right: 20px;
 }
 
 .issue-header-show__title{
@@ -64,8 +62,32 @@
     display: inline-block;
 }
 
+.issue-comments{
+    margin-bottom: 80px;
+    float: left;
+    width: 780px;
+}
 
+.issue-comments__header{
+    
+}
 
+.issue-comments__comment{
+    margin-top: 20px;
+}
+
+.issue-labels{
+    margin-left: 50px;
+    float: left;
+}
+
+.issue-labels__header{
+
+}
+
+.issue-labels__label{
+    padding: 10px;
+}
 
 
 .clear {

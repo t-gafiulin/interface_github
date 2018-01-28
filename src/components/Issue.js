@@ -19,7 +19,7 @@ class Issue extends Component {
     }
 
     render(){
-        let src, author_url, author_name, body_issue, comments, created_at;
+        let src, author_url, author_name, body_issue, comments_amount, created_at, labels;
 
         const data = <Loader />; 
         const { loading, issue } = this.props;
@@ -29,10 +29,27 @@ class Issue extends Component {
             author_url = issue.user.html_url;
             author_name = issue.user.login;
             body_issue = issue.body;
-            comments = issue.comments === 1 ? issue.comments + ' comment' : issue.comments + ' comments';
-            created_at = issue.created_at.split('T').join(' ').slice(0, -1);
-        }
+            comments_amount = issue.comments === 1 ? issue.comments + ' comment' : issue.comments + ' comments';
+            created_at = issue.created_at;
 
+            labels = this.props.issue.labels.map((elem) => {
+                return <div class='issue-labels__label' style={{backgroundColor: '#' + elem.color}}>
+                    {elem.name}
+                </div>
+            })
+        }
+        
+        const comments = this.props.comments.map((elem) => {
+            return <div class='issue-comments__comment'>
+                <Comment 
+                    url={elem.user.html_url} 
+                    login={elem.user.login} 
+                    date={elem.created_at} 
+                    avatar_url={elem.user.avatar_url}
+                    text={this.bodyParser(elem.body)}
+                />
+            </div>
+        })
         
         return loading ? <Loader /> :  
             <div class='container'>
@@ -50,37 +67,24 @@ class Issue extends Component {
                         <div class='issue-header-meta__state'>{issue.state}</div>
                         <a class='issue-header-meta__author' href={author_url}>{author_name}</a>
                         <div class='issue-header-meta__date'>opened this issue {created_at} </div>
-                        <div class='issue-header-meta__comments'> - {comments}</div>
+                        <div class='issue-header-meta__comments'> - {comments_amount}</div>
                     </div>
-                    <Comment 
-                        url={author_url} 
-                        login={author_name} 
-                        date={created_at} 
-                        avatar_url={src}
-                        text={this.bodyParser(body_issue)}
-                    />
+                    <div class='issue-comments'>
+                        <Comment 
+                            url={author_url} 
+                            login={author_name} 
+                            date={created_at} 
+                            avatar_url={src}
+                            text={this.bodyParser(body_issue)}
+                        />
+                        {comments}
+                    </div>
+                    <div class='issue-labels'>
+                        <h2 class='issue-labels__header'>Labels</h2>
+                        {labels}
+                    </div>
                 </div>
             </div>
-            // <div class='container'>
-            //     <Link to="/"><button class='back-button'>Back to Search</button></Link>
-            //     <div class='user'>
-            //         <img class='user__image' src={src} alt="" width='300px' height='300px'/><br/>
-            //         <a class='user__link' href={author_url}>
-            //             <button class='user__github-button'>{author_name} GitHub profile</button>
-            //         </a>   
-            //     </div>
-            //     <div class='issue-info'>
-            //         <div class='issue-info__number'>#{issue.number}</div>
-            //         <div class='issue-info__title'>{issue.title}</div>
-            //         <div class='issue-info__state'>{issue.state}</div>
-            //         <div class='labels'>
-            //             labels
-            //         </div>
-            //         <div class='issue-info__created'>{issue.created_at}</div>
-            //     </div>
-            //     <div class='issue-body clear' dangerouslySetInnerHTML={this.bodyParser(body_issue)} />
-            // </div>;
-
     }
 }
 
@@ -90,5 +94,6 @@ export default connect(
     state => ({
         issue: state.issue.issue,
         loading: state.issue.issueLoad,
+        comments: state.issue.comments,
     })  
 )(Issue);
