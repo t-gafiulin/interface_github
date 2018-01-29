@@ -1,7 +1,8 @@
 .container{
-    width: 1020px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    padding: 20px;
 }
 
 pre{
@@ -10,4 +11,22 @@ pre{
 
 .clear {
     clear: both; /* Отмена обтекания */
+}
+
+@media (min-width: 576px) {
+    .container{
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container{
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 978px) {
+    .container{
+        max-width: 960px;
+    }
 }

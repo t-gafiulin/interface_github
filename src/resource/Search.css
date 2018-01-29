@@ -6,6 +6,7 @@
 }
 
 .list-issue{
+    width: 100%;
     margin-top: 20px;
     border: 1px solid rgb(225, 228, 232);
 }
@@ -29,4 +30,40 @@
     display: inline-block;
     width: 80px;
     height: 30px;
+}
+
+.search{
+    width: 300px;
+}
+
+.search__login,
+.search__repository,
+.search__button{
+    width: 300px;
+    display: block;
+    margin-bottom: 5px;
+    box-sizing: content-box;
+    padding:0;
+}
+
+@media (min-width: 576px) {    
+    .search{
+        width: 100%;
+    }
+    .search__login,
+    .search__repository,
+    .search__button{
+        width: 170px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 978px) {
+
 }

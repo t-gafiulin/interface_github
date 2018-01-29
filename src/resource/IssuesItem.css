@@ -20,7 +20,7 @@ a:hover{
 
 .issue-item__text{
     display: inline-block;
-    width: 900px;
+    width: 90%;
 }
 
 .issue-item__button{
@@ -70,4 +70,23 @@ a:hover{
     padding: 3px 4px;
     display: inline-block;
     margin-left: 5px;
+}
+
+@media (min-width: 576px) {
+    .issue-item__text{
+        width: 540px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .issue-item__text{
+        width: 720px;
+    }
+}
+
+@media (min-width: 978px) {
+    .issue-item__text{
+        width: 960px;
+    }
 }

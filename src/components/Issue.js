@@ -71,6 +71,10 @@ class Issue extends Component {
                         <div class='issue-header-meta__date'>opened this issue {created_at} </div>
                         <div class='issue-header-meta__comments'> - {comments_amount}</div>
                     </div>
+                    <div class='issue-labels'>
+                        <h2 class='issue-labels__header'>Labels</h2>
+                        {labels}
+                    </div>
                     <div class='issue-comments'>
                         <Comment 
                             url={author_url} 
@@ -81,10 +85,7 @@ class Issue extends Component {
                         />
                         {comments}
                     </div>
-                    <div class='issue-labels'>
-                        <h2 class='issue-labels__header'>Labels</h2>
-                        {labels}
-                    </div>
+                    
                 </div>
             </div>
     }

@@ -14,10 +14,7 @@
     margin-right: 150px;
     font-weight: normal;
     line-height: 1.125;
-}
-
-.issue-header-show__text-header{
-
+    font-size: 24px;
 }
 
 .issue-header-show__number{
@@ -65,7 +62,7 @@
 .issue-comments{
     margin-bottom: 80px;
     float: left;
-    width: 780px;
+    width: 95%;
 }
 
 .issue-comments__header{
@@ -77,14 +74,46 @@
 }
 
 .issue-labels{
-    margin-left: 50px;
-    float: left;
+    margin-bottom: 10px;
 }
 
 .issue-labels__header{
-
+    display: none;
 }
 
 .issue-labels__label{
     padding: 10px;
+    display: inline-block;
+}
+
+@media (min-width: 576px) {
+
+}
+
+
+@media (min-width: 768px) {
+    .issue-header-show__title{
+        font-size: 32px;
+    }
+
+    .issue-comments{
+        width: 75%;
+    }
+
+    .issue-labels{
+        float: right;
+        width: 20%;
+    }
+
+    .issue-labels__label{
+        display: block;
+    }
+
+    .issue-labels__header{
+        display: block;
+    }
+}
+
+@media (min-width: 978px) {
+
 }

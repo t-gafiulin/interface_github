@@ -63,16 +63,22 @@ class Search extends Component {
                 <p>Not found</p> : <div class='list-issue'><div class='list-issue-header'>Issues</div>{issues}</div>);
                 
         return <div class='container'>
-            <input 
-                value={this.state.login} 
-                onChange={this.handleChange.bind(this, 'login')}
-                placeholder='Login for Github' />
-            <input 
-                value={this.state.repositoryName} 
-                onChange={this.handleChange.bind(this, 'repositoryName')} 
-                placeholder='Repository name'/>
-            <button onClick={this.handleClick.bind(this)}>Search</button>
-            
+            <div class='search'>
+                <input 
+                    class='search__login'
+                    value={this.state.login} 
+                    onChange={this.handleChange.bind(this, 'login')}
+                    placeholder='Login for Github' />
+                <input 
+                    class='search__repository'
+                    value={this.state.repositoryName} 
+                    onChange={this.handleChange.bind(this, 'repositoryName')} 
+                    placeholder='Repository name'/>
+                <button 
+                    class='search__button'
+                    onClick={this.handleClick.bind(this)}>Search</button>
+            </div>
+
             <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
 
             <div class='pagination'>
