@@ -13,7 +13,6 @@ export default class IssuesItem extends Component {
     }
 
     handleClick(){
-        console.log(this.props.number);
         this.props.handleClick(this.props.number);
     }
 
@@ -21,10 +20,7 @@ export default class IssuesItem extends Component {
         const { 
             title, number, date, author_login, url, labels, comments_amount, handleClick,
             login, repository,
-        } = this.props; 
-
-        console.log(this.props);
-        
+        } = this.props;   
 
         const labels_block = labels.map((elem) => {
             return <div className='issue-item__label' style={{backgroundColor: '#' + elem.color}}>

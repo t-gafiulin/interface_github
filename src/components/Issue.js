@@ -8,7 +8,7 @@ import Loader from './LoadingIndicator';
 
 var converter = new Showdown.Converter();
 
-class Issue extends Component {
+export default class Issue extends Component {
     constructor(props){
         super(props);
     }
@@ -22,7 +22,7 @@ class Issue extends Component {
         let src, author_url, author_name, body_issue, comments_amount, created_at, labels;
 
         const data = <Loader />; 
-        const { loading, issue } = this.props;
+        const { loading, issue, commentsList } = this.props;
         
         if(!loading) {
             src = issue.user.avatar_url;
@@ -32,7 +32,7 @@ class Issue extends Component {
             comments_amount = issue.comments === 1 ? issue.comments + ' comment' : issue.comments + ' comments';
             created_at = issue.created_at;
 
-            labels = this.props.issue.labels.map((elem) => {
+            labels = issue.labels.map((elem) => {
                 return <div class='issue-labels__label' style={{backgroundColor: '#' + elem.color}}>
                     {elem.name}
                 </div>
@@ -41,7 +41,7 @@ class Issue extends Component {
             
         }
         
-        const comments = this.props.comments.map((elem) => {
+        const comments = commentsList.map((elem) => {
             return <div class='issue-comments__comment'>
                 <Comment 
                     url={elem.user.html_url} 
@@ -90,13 +90,3 @@ class Issue extends Component {
             </div>
     }
 }
-
-
-
-export default connect(
-    state => ({
-        issue: state.issue.issue,
-        loading: state.issue.issueLoad,
-        comments: state.issue.comments,
-    })  
-)(Issue);

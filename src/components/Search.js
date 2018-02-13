@@ -57,9 +57,11 @@ class Search extends Component {
             />
         )
 
+        let errors = <p>Not found</p>;
+
         let data = this.props.loading ? 
             <Loader /> : (this.props.error ? 
-                <p>Not found</p> : <div className='list-issue'><div className='list-issue-header'>Issues</div>{issues}</div>);
+                errors : <div className='list-issue'><div className='list-issue-header'>Issues</div>{issues}</div>);
                 
         return <div className='container'>
             <div className='search'>
@@ -110,7 +112,6 @@ export default connect(
         page: state.issue.page,
         login: state.issue.login,
         repositoryName: state.issue.repositoryName,
-        perPage: state.issue.perPage,
         loading: state.issue.loading,
         error: state.issue.error,
     }),
