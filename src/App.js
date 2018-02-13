@@ -12,7 +12,7 @@ export default class App extends Component{
             <Switch>
                 <Route exact path="/" component={Search} />
                 <Route exact path="/:login/:repository" component={Search} />
-                <Route path="/issue" component={Issue} />
+                <Route path="/:login/:repository/issue/:number" component={Issue} />
             </Switch>
         </Router> 
     }

@@ -47,7 +47,9 @@ class Search extends Component {
                 title={child.title}
                 number={child.number}
                 date={child.created_at}
-                login={child.user.login}
+                author_login={child.user.login}
+                login={this.props.login}
+                repository={this.props.repositoryName}
                 url={child.user.html_url}
                 labels={child.labels}
                 comments_amount={child.comments}
@@ -76,7 +78,7 @@ class Search extends Component {
                     onClick={this.handleClick}
                     to={`/${this.state.login}/${this.state.repositoryName}`}>Search</Link> 
             </div>
-            
+
 
             <div className='pagination'>
                 <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.props.page === 1}>Prev</button>

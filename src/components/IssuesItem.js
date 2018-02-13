@@ -18,7 +18,12 @@ export default class IssuesItem extends Component {
     }
 
     render(){
-        const { title, number, date, login, url, labels, comments_amount, handleClick } = this.props; 
+        const { 
+            title, number, date, author_login, url, labels, comments_amount, handleClick,
+            login, repository,
+        } = this.props; 
+
+        console.log(this.props);
         
 
         const labels_block = labels.map((elem) => {
@@ -31,7 +36,7 @@ export default class IssuesItem extends Component {
             <div className='issue-item__text'>
                 <div className='issue-item__header'>
                     <div className='issue-item__button' onClick={this.handleClick.bind(this)}>
-                        <Link className='issue-item__link' to='/issue'>{title}</Link>  
+                        <Link className='issue-item__link' to={`/${login}/${repository}/issue/${number}`}>{title}</Link>  
                     </div>
                     <div className='issue-item__labels'>
                         {labels_block}
@@ -40,7 +45,7 @@ export default class IssuesItem extends Component {
                 <div className='issue-item__meta'>
                     <div className='issue-item__number'>#{number}</div>
                     <div className='issue-item__date'>opened {this.dateParser(date)} by</div>
-                    <a className='issue-item__login' href={url}>{login}</a>
+                    <a className='issue-item__login' href={url}>{author_login}</a>
                 </div>
             </div>
             <div className='issue-item__comments'>{comments_amount}</div>
