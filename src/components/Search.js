@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchIssues, fetchIssue } from '../AC';
 import Loader from './LoadingIndicator';
-import Issue from './Issue';
-import IssuesItem from './IssuesItem'
-import { Link } from 'react-router-dom';
+import IssuesItem from './IssuesItem';
 import '../resource/Search.css';
 
 class Search extends Component {
