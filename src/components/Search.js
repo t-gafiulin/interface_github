@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchIssues, fetchIssue } from '../AC';
 import Loader from './LoadingIndicator';
+import { Link } from 'react-router-dom';
 import IssuesItem from './IssuesItem';
 import '../resource/Search.css';
 
@@ -70,12 +71,12 @@ class Search extends Component {
                     value={this.state.repositoryName} 
                     onChange={(e) => this.handleChange('repositoryName', e)} 
                     placeholder='Repository name'/>
-                <button 
-                    className='search__button'
-                    onClick={this.handleClick}>Search</button>
+                <Link 
+                    className='search__button' 
+                    onClick={this.handleClick}
+                    to={`/${this.state.login}/${this.state.repositoryName}`}>Search</Link> 
             </div>
-
-            <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
+            
 
             <div className='pagination'>
                 <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.props.page === 1}>Prev</button>

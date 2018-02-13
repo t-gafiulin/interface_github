@@ -11,6 +11,7 @@ export default class App extends Component{
         return <Router>
             <Switch>
                 <Route exact path="/" component={Search} />
+                <Route exact path="/:login/:repository" component={Search} />
                 <Route path="/issue" component={Issue} />
             </Switch>
         </Router> 

@@ -22,28 +22,28 @@ export default class IssuesItem extends Component {
         
 
         const labels_block = labels.map((elem) => {
-            return <div class='issue-item__label' style={{backgroundColor: '#' + elem.color}}>
+            return <div className='issue-item__label' style={{backgroundColor: '#' + elem.color}}>
                 {elem.name}
             </div>
         })
 
-        return <div class='issue-item'>
-            <div class='issue-item__text'>
-                <div class='issue-item__header'>
-                    <div class='issue-item__button' onClick={this.handleClick.bind(this)}>
-                        <Link class='issue-item__link' to='/issue'>{title}</Link>  
+        return <div className='issue-item'>
+            <div className='issue-item__text'>
+                <div className='issue-item__header'>
+                    <div className='issue-item__button' onClick={this.handleClick.bind(this)}>
+                        <Link className='issue-item__link' to='/issue'>{title}</Link>  
                     </div>
-                    <div class='issue-item__labels'>
+                    <div className='issue-item__labels'>
                         {labels_block}
                     </div>
                 </div>
-                <div class='issue-item__meta'>
-                    <div class='issue-item__number'>#{number}</div>
-                    <div class='issue-item__date'>opened {this.dateParser(date)} by</div>
-                    <a class='issue-item__login' href={url}>{login}</a>
+                <div className='issue-item__meta'>
+                    <div className='issue-item__number'>#{number}</div>
+                    <div className='issue-item__date'>opened {this.dateParser(date)} by</div>
+                    <a className='issue-item__login' href={url}>{login}</a>
                 </div>
             </div>
-            <div class='issue-item__comments'>{comments_amount}</div>
+            <div className='issue-item__comments'>{comments_amount}</div>
         </div>
     }
 }
