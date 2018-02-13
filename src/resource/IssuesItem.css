@@ -58,7 +58,8 @@ a:hover{
 
 .issue-item__comments{
     float: right;
-    display: inline-block;
+    width: 30px;
+    display: block;
 }
 
 .issue-item__labels{
@@ -70,23 +71,4 @@ a:hover{
     padding: 3px 4px;
     display: inline-block;
     margin-left: 5px;
-}
-
-@media (min-width: 576px) {
-    .issue-item__text{
-        width: 540px;
-    }
-}
-
-
-@media (min-width: 768px) {
-    .issue-item__text{
-        width: 720px;
-    }
-}
-
-@media (min-width: 978px) {
-    .issue-item__text{
-        width: 960px;
-    }
 }
