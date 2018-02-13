@@ -45,7 +45,6 @@ export function fetchIssues(login, repositoryName, page, perPage){
                         type: LOAD_ISSUES_ERROR,
                     });
             })
-        .error( error => console.log(error))
     }
 }
 

@@ -9,31 +9,29 @@ class Search extends Component {
     constructor(props){
         super(props);
 
-        //this.handleClickIssue = this.handleClickIssue.bind(this);
-
         this.state = {
             login: '',
             repositoryName: '',
             perPage: '30',
         }
-    
+  
     }
 
-    handleChange(stateName, event){
+    handleChange = (stateName, event) => {
         this.setState({[stateName]: event.target.value});
     }
 
-    handleClick(nextOrPrevButton){
-        const {login, repositoryName, page, perPage} = this.props;
+    handleClick = (nextOrPrevButton) => {
+        const {login, repositoryName, page, perPage, fetchIssues} = this.props;
         if(nextOrPrevButton === 'next') {
-            this.props.fetchIssues(login, repositoryName, page + 1, this.state.perPage);
+           fetchIssues(login, repositoryName, page + 1, perPage);
         } else if (nextOrPrevButton === 'prev') {
-            this.props.fetchIssues(login, repositoryName, page - 1, this.state.perPage);
+            fetchIssues(login, repositoryName, page - 1, perPage);
         } else if (nextOrPrevButton === 'perPage') {
-            this.props.fetchIssues(login, repositoryName, 1, this.state.perPage);
+            fetchIssues(login, repositoryName, 1, perPage);
         } else {
             this.setState({login: '', repositoryName: ''});
-            this.props.fetchIssues(this.state.login, this.state.repositoryName, this.props.page, this.state.perPage);
+            fetchIssues(this.state.login, this.state.repositoryName, page, perPage);
         }
     }
 
@@ -58,38 +56,38 @@ class Search extends Component {
 
         let data = this.props.loading ? 
             <Loader /> : (this.props.error ? 
-                <p>Not found</p> : <div class='list-issue'><div class='list-issue-header'>Issues</div>{issues}</div>);
+                <p>Not found</p> : <div className='list-issue'><div className='list-issue-header'>Issues</div>{issues}</div>);
                 
-        return <div class='container'>
-            <div class='search'>
+        return <div className='container'>
+            <div className='search'>
                 <input 
-                    class='search__login'
+                    className='search__login'
                     value={this.state.login} 
-                    onChange={this.handleChange.bind(this, 'login')}
+                    onChange={(e) => this.handleChange('login', e)}
                     placeholder='Login for Github' />
                 <input 
-                    class='search__repository'
+                    className='search__repository'
                     value={this.state.repositoryName} 
-                    onChange={this.handleChange.bind(this, 'repositoryName')} 
+                    onChange={(e) => this.handleChange('repositoryName', e)} 
                     placeholder='Repository name'/>
                 <button 
-                    class='search__button'
-                    onClick={this.handleClick.bind(this)}>Search</button>
+                    className='search__button'
+                    onClick={this.handleClick}>Search</button>
             </div>
 
             <h3>{(this.props.login + ' ' + this.props.repositoryName)}</h3>
 
-            <div class='pagination'>
-                <button class='pagination__prev' onClick={this.handleClick.bind(this, 'prev')} disabled={this.props.page === 1}>Prev</button>
-                    <span class='pagination__page'>{this.props.page}</span>
-                <button class='pagination__next' onClick={this.handleClick.bind(this, 'next')} disabled={issues.length < this.props.perPage}>Next</button>
+            <div className='pagination'>
+                <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.props.page === 1}>Prev</button>
+                    <span className='pagination__page'>{this.props.page}</span>
+                <button className='pagination__next' onClick={() => this.handleClick('next')} disabled={issues.length < this.props.perPage}>Next</button>
             </div>
 
             <select 
-                class='select-block'
+                className='select-block'
                 value={this.props.perPage} 
-                onChange={this.handleChange.bind(this, 'perPage')} 
-                onClick={this.handleClick.bind(this, 'perPage')}
+                onChange={(e) => this.handleChange('perPage', e)} 
+                onClick={() => this.handleClick('perPage')}
             >
                 <option value="1">1</option>
                 <option value="5">5</option>
