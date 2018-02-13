@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Search from './components/Search';
-import IssueContainer from './components/IssueContainer';
+import IssueContainer from './containers/IssueContainer';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

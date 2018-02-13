@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from './Comment'
 import Showdown from 'showdown';
@@ -23,6 +22,7 @@ export default class Issue extends Component {
 
         const data = <Loader />; 
         const { loading, issue, commentsList } = this.props;
+        console.log(loading, issue, commentsList)
         
         if(!loading) {
             src = issue.user.avatar_url;
@@ -33,16 +33,15 @@ export default class Issue extends Component {
             created_at = issue.created_at;
 
             labels = issue.labels.map((elem) => {
-                return <div class='issue-labels__label' style={{backgroundColor: '#' + elem.color}}>
+                return <div className='issue-labels__label' style={{backgroundColor: '#' + elem.color}}>
                     {elem.name}
                 </div>
             })
-
-            
+       
         }
         
         const comments = commentsList.map((elem) => {
-            return <div class='issue-comments__comment'>
+            return <div className='issue-comments__comment'>
                 <Comment 
                     url={elem.user.html_url} 
                     login={elem.user.login} 
@@ -54,28 +53,28 @@ export default class Issue extends Component {
         })
         
         return loading ? <Loader /> :  
-            <div class='container'>
-                <div class='issue-body'>
-                    <div class='issue-header-show'>
-                        <div class='issue-header-show__button'>
+            <div className='container'>
+                <div className='issue-body'>
+                    <div className='issue-header-show'>
+                        <div className='issue-header-show__button'>
                             <Link to="/"><button>Back</button></Link>
                         </div>
-                        <h1 class='issue-header-show__title'>
-                            <span class='issue-header-show__text-header'>{issue.title}</span>
-                            <span class='issue-header-show__number'> #{issue.number}</span>
+                        <h1 className='issue-header-show__title'>
+                            <span className='issue-header-show__text-header'>{issue.title}</span>
+                            <span className='issue-header-show__number'> #{issue.number}</span>
                         </h1>
                     </div>
-                    <div class='issue-header-meta'>
-                        <div class='issue-header-meta__state'>{issue.state}</div>
-                        <a class='issue-header-meta__author' href={author_url}>{author_name}</a>
-                        <div class='issue-header-meta__date'>opened this issue {created_at} </div>
-                        <div class='issue-header-meta__comments'> - {comments_amount}</div>
+                    <div className='issue-header-meta'>
+                        <div className='issue-header-meta__state'>{issue.state}</div>
+                        <a className='issue-header-meta__author' href={author_url}>{author_name}</a>
+                        <div className='issue-header-meta__date'>opened this issue {created_at} </div>
+                        <div className='issue-header-meta__comments'> - {comments_amount}</div>
                     </div>
-                    <div class='issue-labels'>
-                        <h2 class='issue-labels__header'>Labels</h2>
+                    <div className='issue-labels'>
+                        <h2 className='issue-labels__header'>Labels</h2>
                         {labels}
                     </div>
-                    <div class='issue-comments'>
+                    <div className='issue-comments'>
                         <Comment 
                             url={author_url} 
                             login={author_name} 

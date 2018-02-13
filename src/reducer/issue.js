@@ -11,7 +11,7 @@ const initialState = {
     loading: false,
     error: false,
     issue: null,
-    issueLoad: false,
+    issueLoad: true,
     comments: [],
 }
 
