@@ -3,14 +3,13 @@ import {
     LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST,
 } from '../constants/index';
 
-function receiveIssues(json, login, repositoryName, page, perPage){
+function receiveIssues(json, login, repositoryName, page){
     return {
         type: LOAD_ISSUES_SUCCESS,
         issues: json,
         login: login,
         repositoryName: repositoryName,
         page: page,
-        perPage: perPage,
     }
 }
 
@@ -39,7 +38,7 @@ export function fetchIssues(login, repositoryName, page, perPage){
         .then( 
             json => {
                 if(!json.message)
-                    dispatch(receiveIssues(json, login, repositoryName, page, perPage));
+                    dispatch(receiveIssues(json, login, repositoryName, page));
                 else
                     dispatch({
                         type: LOAD_ISSUES_ERROR,

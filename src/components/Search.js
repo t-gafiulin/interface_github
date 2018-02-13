@@ -22,16 +22,16 @@ class Search extends Component {
     }
 
     handleClick = (nextOrPrevButton) => {
-        const {login, repositoryName, page, perPage, fetchIssues} = this.props;
+        const {login, repositoryName, page, fetchIssues} = this.props;
         if(nextOrPrevButton === 'next') {
-           fetchIssues(login, repositoryName, page + 1, perPage);
+           fetchIssues(login, repositoryName, page + 1, this.state.perPage);
         } else if (nextOrPrevButton === 'prev') {
-            fetchIssues(login, repositoryName, page - 1, perPage);
+            fetchIssues(login, repositoryName, page - 1, this.state.perPage);
         } else if (nextOrPrevButton === 'perPage') {
-            fetchIssues(login, repositoryName, 1, perPage);
+            fetchIssues(login, repositoryName, 1, this.state.perPage);
         } else {
             this.setState({login: '', repositoryName: ''});
-            fetchIssues(this.state.login, this.state.repositoryName, page, perPage);
+            fetchIssues(this.state.login, this.state.repositoryName, page, this.state.perPage);
         }
     }
 
@@ -85,7 +85,7 @@ class Search extends Component {
 
             <select 
                 className='select-block'
-                value={this.props.perPage} 
+                value={this.state.perPage} 
                 onChange={(e) => this.handleChange('perPage', e)} 
                 onClick={() => this.handleClick('perPage')}
             >

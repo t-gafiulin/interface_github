@@ -8,7 +8,6 @@ const initialState = {
     login: '',
     repositoryName: '',
     page: 1,
-    perPage: '30',
     loading: false,
     error: false,
     issue: null,
@@ -19,14 +18,13 @@ const initialState = {
 export default function issue(state = initialState, action){
     switch(action.type){
         case LOAD_ISSUES_SUCCESS:
-            const {issues, login, repositoryName, page, perPage} = action;
+            const {issues, login, repositoryName, page} = action;
             return {
                 ...state,
                 issues: issues,
                 login: login,
                 repositoryName: repositoryName,
                 page: page,
-                perPage: perPage,
                 loading: false,
                 error: false,
             } 
