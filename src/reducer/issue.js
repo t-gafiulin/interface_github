@@ -12,6 +12,7 @@ const initialState = {
     issue: null,
     issueLoad: true,
     comments: [],
+    loadingIssues: true,
 }
 
 export default function issue(state = initialState, action){
@@ -23,19 +24,19 @@ export default function issue(state = initialState, action){
                 issues: issues,
                 login: login,
                 repositoryName: repositoryName,
-                loading: false,
+                loadingIssues: false,
                 error: false,
             } 
         case LOAD_ISSUES_REQUEST:
             return {
                 ...state,
-                loading: true,
+                loadingIssues: true,
                 error: false,
             }
         case LOAD_ISSUES_ERROR:
             return {
                 ...state,
-                loading: false,
+                loadingIssues: false,
                 error: true,
             }
         case LOAD_ISSUE_SUCCESS:
