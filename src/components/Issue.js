@@ -4,6 +4,7 @@ import Comment from './Comment'
 import Showdown from 'showdown';
 import '../resource/Issue.css';
 import Loader from './LoadingIndicator';
+import BackButton from './BackButton'
 
 var converter = new Showdown.Converter();
 
@@ -56,9 +57,7 @@ export default class Issue extends Component {
             <div className='container'>
                 <div className='issue-body'>
                     <div className='issue-header-show'>
-                        <div className='issue-header-show__button'>
-                            <Link to="/"><button>Back</button></Link>
-                        </div>
+                        <BackButton />
                         <h1 className='issue-header-show__title'>
                             <span className='issue-header-show__text-header'>{issue.title}</span>
                             <span className='issue-header-show__number'> #{issue.number}</span>

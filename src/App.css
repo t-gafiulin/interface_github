@@ -13,6 +13,12 @@ pre{
     clear: both; /* Отмена обтекания */
 }
 
+.back-button{
+    float: right;
+    margin-top: 3px;
+    margin-right: 20px;
+}
+
 @media (min-width: 576px) {
     .container{
         max-width: 540px;
