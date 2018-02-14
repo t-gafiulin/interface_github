@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchIssues, fetchIssue } from '../AC';
 import Loader from './LoadingIndicator';
 import { Link } from 'react-router-dom';
-import IssuesItem from './IssuesItem';
+import IssuesList from './IssuesList';
 import '../resource/Search.css';
 
 class Search extends Component {
@@ -37,31 +37,25 @@ class Search extends Component {
     }
 
     handleClickIssue(number){
+        console.log(number);
         const { fetchIssue, login, repositoryName } = this.props;
         fetchIssue(login, repositoryName, number);
     }
 
     render(){
-        const issues = this.props.issues.map((child, index) => 
-            <IssuesItem 
-                title={child.title}
-                number={child.number}
-                date={child.created_at}
-                author_login={child.user.login}
-                login={this.props.login}
-                repository={this.props.repositoryName}
-                url={child.user.html_url}
-                labels={child.labels}
-                comments_amount={child.comments}
-                handleClick={this.handleClickIssue.bind(this)}
-            />
-        )
+        const issues = <IssuesList 
+                            issues={this.props.issues} 
+                            login={this.props.login}
+                            repository={this.props.repositoryName}
+                            handleClick={this.handleClickIssue.bind(this)}
+                        />
 
         let errors = <p>Not found</p>;
 
         let data = this.props.loading ? 
             <Loader /> : (this.props.error ? 
-                errors : <div className='list-issue'><div className='list-issue-header'>Issues</div>{issues}</div>);
+                errors : <div className='list-issue'>
+                            <div className='list-issue-header'>Issues</div>{issues}</div>);
                 
         return <div className='container'>
             <div className='search'>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import Comment from './Comment'
 import Showdown from 'showdown';
 import '../resource/Issue.css';
@@ -23,7 +22,6 @@ export default class Issue extends Component {
 
         const data = <Loader />; 
         const { loading, issue, commentsList } = this.props;
-        console.log(loading, issue, commentsList)
         
         if(!loading) {
             src = issue.user.avatar_url;
