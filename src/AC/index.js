@@ -1,6 +1,6 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST,
+    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST, LOAD_ISSUE_ERROR,
     LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
 } from '../constants/index';
 
@@ -83,9 +83,20 @@ export function fetchIssue(login, repositoryName, numberIssue){
         return Promise.all([
             fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}?&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
             .then( response => response.json())
-            .then( json => {
-                dispatch(receiveIssue(json)) 
-            })
+            .then( 
+                json => {
+                    dispatch(receiveIssue(json)) 
+
+                    if(!json.message)
+                        dispatch(receiveIssue(json));
+                    else
+                        dispatch({
+                            type: LOAD_ISSUE_ERROR,
+                        });
+
+                }
+                
+            )
             .catch (error => console.log(error)),
 
             fetch(`https://api.github.com/repos/${login}/${repositoryName}/issues/${numberIssue}/comments?&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
