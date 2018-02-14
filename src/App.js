@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Search from './components/Search';
+import SearchContainer from './containers/SearchContainer';
 import IssueContainer from './containers/IssueContainer';
 import IssuesListContainer from './containers/IssuesListContainer';
 import './App.css';
@@ -11,10 +11,11 @@ export default class App extends Component{
     render(){
         return <Router>
             <Switch>
-                <Route exact path="/" component={Search} />
+                <Route exact path="/" component={SearchContainer} />
+                <Route exact path="/:login" component={SearchContainer} />
                 <Route exact path="/:login/:repository" component={IssuesListContainer} />
                 <Route exact path="/:login/:repository/:page" component={IssuesListContainer} />
-                <Route path="/:login/:repository/issue/:number" component={IssueContainer} />
+                <Route exact path="/:login/:repository/issue/:number" component={IssueContainer} />
             </Switch>
         </Router> 
     }
