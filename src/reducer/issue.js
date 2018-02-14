@@ -1,6 +1,7 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST, LOAD_COMMENTS_ERROR
+    LOAD_ISSUE_SUCCESS, LOAD_ISSUE_ERROR, LOAD_ISSUE_REQUEST, 
+    LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_ERROR,
     LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
 } from '../constants/index';
 
@@ -9,7 +10,10 @@ const initialState = {
     login: '',
     repositoryName: '',
     loading: false,
-    error: false,
+    loadIssueError: false,
+    loadIssuesError: false,
+    loadRepositoriesError: false,
+    loadCommentsError: false,
     issue: null,
     issueLoad: true,
     comments: [],
@@ -27,40 +31,59 @@ export default function issue(state = initialState, action){
                 login: login,
                 repositoryName: repositoryName,
                 loadingIssues: false,
-                error: false,
+                loadIssuesError: false,
             } 
         case LOAD_ISSUES_REQUEST:
             return {
                 ...state,
                 loadingIssues: true,
-                error: false,
+                loadIssuesError: false,
             }
         case LOAD_ISSUES_ERROR:
             return {
                 ...state,
                 loadingIssues: false,
-                error: true,
+                loadIssuesError: true,
             }
         case LOAD_ISSUE_SUCCESS:
             return {
                 ...state,
                 issue: action.issue,
                 issueLoad: false,
+                loadIssueError: false
             }
         case LOAD_ISSUE_REQUEST:
             return {
                 ...state,
                 issueLoad: true,
+                loadIssueError: false,
+            }
+        case LOAD_ISSUE_ERROR:
+            return {
+                ...state,
+                loadIssueError: true,
             }
         case LOAD_COMMENTS_SUCCESS:
             return {
                 ...state,
                 comments: action.comments,
+                loadCommentsError: false,
+            }
+        case LOAD_COMMENTS_ERROR:
+            return {
+                ...state,
+                loadCommentsError: true,
             }
         case LOAD_REPOSITORIES_SUCCESS: 
             return {
                 ...state,
                 repositories: action.repositories,
+                loadRepositoriesError: false,
+            }
+        case LOAD_REPOSITORIES_ERROR:
+            return {
+                ...state,
+                loadRepositoriesError: true,
             }
         default:
             return state;
