@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IssuesItem from './IssuesItem';
 
-const IssuesList = ({issues, login, repository, handleClick}) => {
+const IssuesList = ({issues, login, repository}) => {
     const issuesList = issues.map((child, index) => {
         return <IssuesItem 
             title={child.title}
@@ -13,7 +13,6 @@ const IssuesList = ({issues, login, repository, handleClick}) => {
             url={child.user.html_url}
             labels={child.labels}
             comments_amount={child.comments}
-            handleClick={handleClick.bind(null, child.number)}
         />
     }
     )

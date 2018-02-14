@@ -41,17 +41,11 @@ class Search extends Component {
         this.setState({page: currentPage});
     }
 
-    handleClickIssue(number){
-        const { fetchIssue, login, repositoryName } = this.props;
-        fetchIssue(login, repositoryName, number);
-    }
-
     render(){
         const issues = <IssuesList 
                             issues={this.props.issues} 
                             login={this.props.login}
                             repository={this.props.repositoryName}
-                            handleClick={this.handleClickIssue.bind(this)}
                         />
 
         let errors = <p>Not found</p>;
@@ -76,7 +70,7 @@ class Search extends Component {
                 <Link 
                     className='search__button' 
                     onClick={this.handleClick}
-                    to={`/${this.state.login}/${this.state.repositoryName}`}>Search</Link> 
+                    to={`/${this.state.login}/${this.state.repositoryName}/${this.state.page}`}>Search</Link> 
             </div>
 
 
