@@ -30,7 +30,7 @@ function receiveComment ( json ) {
 function receiveRepositories ( json ) {
     return {
         type: LOAD_REPOSITORIES_SUCCESS,
-
+        repositories: json,
     }
 }
 

@@ -1,6 +1,7 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST
+    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST,
+    LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
 } from '../constants/index';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
     issueLoad: true,
     comments: [],
     loadingIssues: true,
+    repositories: [],
 }
 
 export default function issue(state = initialState, action){
@@ -54,6 +56,11 @@ export default function issue(state = initialState, action){
             return {
                 ...state,
                 comments: action.comments,
+            }
+        case LOAD_REPOSITORIES_SUCCESS: 
+            return {
+                ...state,
+                repositories: action.repositories,
             }
         default:
             return state;
