@@ -4,6 +4,7 @@ import { fetchIssues } from '../AC';
 import { Link } from 'react-router-dom';
 import Loader from '../components/LoadingIndicator';
 import IssuesList from '../components/IssuesList';
+import BackButton from '../components/BackButton';
 
 class IssuesListContainer extends Component {
     constructor(props){
@@ -46,6 +47,7 @@ class IssuesListContainer extends Component {
 
         return loading ? <Loader /> :
         <div>
+            <BackButton />
             <div className='pagination'>
                 <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.state.page === 1}>
                     <Link 
