@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../resource/Search.css';
 
-const Search = ({login, repository, handleChange}) => {   
-        console.log(`/${login}/${repository}`);        
+const Search = ({login, repository, handleChange}) => {         
         return <div className='container'>
             <div className='search'>
                 <input 

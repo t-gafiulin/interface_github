@@ -40,7 +40,7 @@ export function fetchRepositories(login){
             type: LOAD_REPOSITORIES_REQUEST,
         });
 
-        return fetch(`https://api.github.com/users/${login}/repos/client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
+        return fetch(`https://api.github.com/users/${login}/repos?per_page=200&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
         .then( response => response.json())
         .then( 
             json => {

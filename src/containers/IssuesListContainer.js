@@ -44,7 +44,6 @@ class IssuesListContainer extends Component {
     render(){
         const { login, repository } = this.props.match.params;
         const { issues, loading } = this.props;
-        console.log('issueslistcontaienr');
 
         return loading ? <Loader /> :
         <div>
