@@ -11,6 +11,7 @@ class IssueContainer extends Component {
     componentWillMount(){
         const { login, repository, page } = this.props.match.params;
         
+        
     }
 
     render(){

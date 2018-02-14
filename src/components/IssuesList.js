@@ -3,7 +3,6 @@ import IssuesItem from './IssuesItem';
 
 const IssuesList = ({issues, login, repository, handleClick}) => {
     const issuesList = issues.map((child, index) => {
-
         return <IssuesItem 
             title={child.title}
             number={child.number}

@@ -14,6 +14,7 @@ class Search extends Component {
             login: '',
             repositoryName: '',
             perPage: '30',
+            page: 1,
         }
   
     }
@@ -24,20 +25,23 @@ class Search extends Component {
 
     handleClick = (nextOrPrevButton) => {
         const {login, repositoryName, page, fetchIssues} = this.props;
+        let currentPage = this.state.page;
         if(nextOrPrevButton === 'next') {
-           fetchIssues(login, repositoryName, page + 1, this.state.perPage);
+            fetchIssues(login, repositoryName, ++currentPage, this.state.perPage);
         } else if (nextOrPrevButton === 'prev') {
-            fetchIssues(login, repositoryName, page - 1, this.state.perPage);
+            fetchIssues(login, repositoryName, --currentPage, this.state.perPage);
         } else if (nextOrPrevButton === 'perPage') {
-            fetchIssues(login, repositoryName, 1, this.state.perPage);
+            currentPage = 1;
+            fetchIssues(login, repositoryName, currentPage, this.state.perPage);
         } else {
             this.setState({login: '', repositoryName: ''});
-            fetchIssues(this.state.login, this.state.repositoryName, page, this.state.perPage);
+            fetchIssues(this.state.login, this.state.repositoryName, currentPage, this.state.perPage);
         }
+
+        this.setState({page: currentPage});
     }
 
     handleClickIssue(number){
-        console.log(number);
         const { fetchIssue, login, repositoryName } = this.props;
         fetchIssue(login, repositoryName, number);
     }
@@ -77,8 +81,8 @@ class Search extends Component {
 
 
             <div className='pagination'>
-                <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.props.page === 1}>Prev</button>
-                    <span className='pagination__page'>{this.props.page}</span>
+                <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.state.page === 1}>Prev</button>
+                    <span className='pagination__page'>{this.state.page}</span>
                 <button className='pagination__next' onClick={() => this.handleClick('next')} disabled={issues.length < this.props.perPage}>Next</button>
             </div>
 
