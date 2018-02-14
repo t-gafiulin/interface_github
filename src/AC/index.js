@@ -1,6 +1,7 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
     LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST,
+    LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
 } from '../constants/index';
 
 function receiveIssues(json, login, repositoryName){
@@ -23,6 +24,33 @@ function receiveComment ( json ) {
     return {
         type: LOAD_COMMENTS_SUCCESS,
         comments: json,
+    }
+}
+
+function receiveRepositories ( json ) {
+    return {
+        type: LOAD_REPOSITORIES_SUCCESS,
+
+    }
+}
+
+export function fetchRepositories(login){
+    return function(dispatch){
+        dispatch({
+            type: LOAD_REPOSITORIES_REQUEST,
+        });
+
+        return fetch(`https://api.github.com/users/${login}/repos/client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
+        .then( response => response.json())
+        .then( 
+            json => {
+                if(!json.message)
+                    dispatch(receiveRepositories( json ));
+                else
+                    dispatch({
+                        type: LOAD_REPOSITORIES_ERROR,
+                    });
+            })
     }
 }
 
