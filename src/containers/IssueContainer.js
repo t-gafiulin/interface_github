@@ -12,12 +12,10 @@ class IssueContainer extends Component {
     componentWillMount(){
         const { login, number, repository } = this.props.match.params;
         this.props.fetchIssue(login, repository, number);
-        //console.log( login, number, repository );
     }
 
     render(){
         const { loading, issue, comments } = this.props;
-        console.log(loading, issue, comments);
 
         return loading ? <Loader /> :
         <Issue 

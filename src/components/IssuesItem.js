@@ -12,7 +12,7 @@ export default class IssuesItem extends Component {
         return date.split('T').join(' ').slice(0, -1);
     }
 
-    handleClick(){
+    handleClick = () => {
         this.props.handleClick(this.props.number);
     }
 
@@ -31,7 +31,7 @@ export default class IssuesItem extends Component {
         return <div className='issue-item'>
             <div className='issue-item__text'>
                 <div className='issue-item__header'>
-                    <div className='issue-item__button' onClick={this.handleClick.bind(this)}>
+                    <div className='issue-item__button' onClick={this.handleClick}>
                         <Link className='issue-item__link' to={`/${login}/${repository}/issue/${number}`}>{title}</Link>  
                     </div>
                     <div className='issue-item__labels'>
