@@ -1,7 +1,9 @@
 import { 
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
-    LOAD_ISSUE_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_ISSUE_REQUEST, LOAD_ISSUE_ERROR,
+    LOAD_ISSUE_SUCCESS, LOAD_ISSUE_ERROR, LOAD_ISSUE_REQUEST, 
+    LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_ERROR,
     LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
+    LOAD_USER_ERROR, LOAD_USER_REQUEST, LOAD_USER_SUCCESS,
 } from '../constants/index';
 
 function receiveIssues(json, login, repositoryName){
@@ -34,7 +36,31 @@ function receiveRepositories ( json ) {
     }
 }
 
-export function fetchRepositories(login){
+export function fetchUser(login){
+    return function(dispatch){
+        dispatch({
+            type: LOAD_USER_REQUEST,
+        });
+
+        return fetch(`https://api.github.com/users/${login}?client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
+        .then( response => response.json())
+        .then( 
+            json => {
+                if(!json.message){
+                    dispatch({
+                        type: LOAD_USER_SUCCESS,
+                    })
+                    dispatch(fetchRepositories(login));
+                }
+                else
+                    dispatch({
+                        type: LOAD_USER_ERROR,
+                    });
+            })
+    }
+}
+
+function fetchRepositories(login){
     return function(dispatch){
         dispatch({
             type: LOAD_REPOSITORIES_REQUEST,

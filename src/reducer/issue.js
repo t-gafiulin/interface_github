@@ -3,6 +3,7 @@ import {
     LOAD_ISSUE_SUCCESS, LOAD_ISSUE_ERROR, LOAD_ISSUE_REQUEST, 
     LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_ERROR,
     LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
+    LOAD_USER_ERROR, LOAD_USER_REQUEST, LOAD_USER_SUCCESS,
 } from '../constants/index';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
     loadIssueError: false,
     loadIssuesError: false,
     loadRepositoriesError: false,
+    loadUserError: false,
     loadCommentsError: false,
     issue: null,
     issueLoad: true,
@@ -84,6 +86,16 @@ export default function issue(state = initialState, action){
             return {
                 ...state,
                 loadRepositoriesError: true,
+            }
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                loadUserError: false,
+            }
+        case LOAD_USER_ERROR:
+            return {
+                ...state,
+                loadUserError: true,
             }
         default:
             return state;
