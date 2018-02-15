@@ -20,7 +20,7 @@ const initialState = {
     issueLoad: true,
     comments: [],
     loadingIssues: true,
-    repositories: [],
+    repositories: [''],
 }
 
 export default function issue(state = initialState, action){

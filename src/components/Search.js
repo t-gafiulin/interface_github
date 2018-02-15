@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../resource/Search.css';
 
-const Search = ({login, repository, handleChange}) => {         
+const Search = ({login, repository, handleFocus, handleChange}) => {         
         return <div className='container'>
             <div className='search'>
                 <input 
@@ -13,6 +13,7 @@ const Search = ({login, repository, handleChange}) => {
                 <input 
                     className='search__repository'
                     value={repository} 
+                    onFocus={handleFocus}
                     onChange={(e) => handleChange('repository', e)} 
                     placeholder='Repository name'/>
                 <Link 

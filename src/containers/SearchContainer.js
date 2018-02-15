@@ -21,6 +21,10 @@ class SearchContainer extends Component {
             this.props.fetchUser(login);   
     }
 
+    handleFocus = () => {
+        this.props.fetchUser(this.state.login);  
+    }
+
     handleChange = (stateName, event) => {
         this.setState({[stateName]: event.target.value});
     }
@@ -41,7 +45,8 @@ class SearchContainer extends Component {
             <Search
                 login={this.state.login}
                 repository={this.state.repository}
-                handleChange={this.handleChange.bind(this)}
+                handleFocus={this.handleFocus}
+                handleChange={this.handleChange}
             />
             <div>{errors}</div>
         </div>
