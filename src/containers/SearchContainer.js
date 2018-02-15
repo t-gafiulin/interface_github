@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchRepositories } from '../AC';
+import { fetchUser } from '../AC';
 import Search from '../components/Search';
+import Error from '../components/Error';
+import { LOAD_REPOSITORIES_ERROR, LOAD_USER_ERROR, USER_HAS_NOT_REPOSITORIES } from '../constants/index';
 
 class SearchContainer extends Component {
     constructor(props){
@@ -16,7 +18,7 @@ class SearchContainer extends Component {
     componentWillMount(){
         const { login } = this.props.match.params;
         if(login)
-            this.props.fetchRepositories(login);   
+            this.props.fetchUser(login);   
     }
 
     handleChange = (stateName, event) => {
@@ -24,6 +26,16 @@ class SearchContainer extends Component {
     }
 
     render(){
+        const { repositories, loadUserError, loadRepositoriesError } = this.props;
+
+        const errors = <div>
+                {loadUserError ? <Error type={LOAD_USER_ERROR} /> : 
+                    loadRepositoriesError ? 
+                        <Error type={LOAD_REPOSITORIES_ERROR} /> : 
+                        repositories.length === 0 ?
+                            <Error type={USER_HAS_NOT_REPOSITORIES} /> : ''
+                }
+            </div>
 
         return <div>
             <Search
@@ -31,6 +43,7 @@ class SearchContainer extends Component {
                 repository={this.state.repository}
                 handleChange={this.handleChange.bind(this)}
             />
+            <div>{errors}</div>
         </div>
         ;
     }
@@ -39,7 +52,9 @@ class SearchContainer extends Component {
 export default connect(
     state => ({
         repositories: state.issue.repositories,
+        loadUserError: state.issue.loadUserError,
+        loadRepositoriesError: state.issue.loadRepositoriesError,
     }),
-    { fetchRepositories }
+    { fetchUser }
 )(SearchContainer);
 
