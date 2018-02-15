@@ -5,7 +5,8 @@ import {
     LOAD_USER_ERROR,
     LOAD_ISSUE_ERROR,
     LOAD_COMMENTS_ERROR,
-    USER_HAS_NOT_REPOSITORIES
+    USER_HAS_NOT_REPOSITORIES,
+    
 } from '../constants/index';
 
 const Error = ({type}) => {

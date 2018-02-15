@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Loader from '../components/LoadingIndicator';
 import IssuesList from '../components/IssuesList';
 import BackButton from '../components/BackButton';
+import { LOAD_ISSUES_ERROR } from '../constants';
+import Error from '../components/Error';
 
 class IssuesListContainer extends Component {
     constructor(props){
@@ -81,6 +83,7 @@ class IssuesListContainer extends Component {
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
+            {this.props.loadIssuesError ? <Error type={LOAD_ISSUES_ERROR} /> :
             <div className='list-issue'>
                 <div className='list-issue-header'>Issues</div>
                 <IssuesList 
@@ -89,6 +92,7 @@ class IssuesListContainer extends Component {
                     repository={repository}
                 />
             </div>
+            }
         </div>
         ;
     }
@@ -98,6 +102,7 @@ export default connect(
     state => ({
         issues: state.issue.issues,
         loading: state.issue.loadingIssues,
+        loadIssuesError: state.issue.loadIssuesError,
     }),
     { fetchIssues }
 )(IssuesListContainer);

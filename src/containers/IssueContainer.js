@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Issue from '../components/Issue';
 import { fetchIssue } from '../AC';
 import Loader from '../components/LoadingIndicator';
+import { LOAD_ISSUE_ERROR } from '../constants';
+import Error from '../components/Error';
 
 class IssueContainer extends Component {
     constructor(props){
@@ -15,14 +17,15 @@ class IssueContainer extends Component {
     }
 
     render(){
-        const { loading, issue, comments } = this.props;
+        const { loading, issue, comments, loadIssueError } = this.props;
 
         return loading ? <Loader /> :
-        <Issue 
-            loading={loading}
-            issue={issue}
-            commentsList={comments}
-        />
+                    loadIssueError ? <Error type={LOAD_ISSUE_ERROR} /> :
+                    <Issue 
+                        loading={loading}
+                        issue={issue}
+                        commentsList={comments}
+                    />
     }
 }
 
@@ -31,6 +34,7 @@ export default connect(
         issue: state.issue.issue,
         loading: state.issue.issueLoad,
         comments: state.issue.comments,
+        loadIssueError: state.issue.loadIssueError,
     }),
     { fetchIssue }
 )(IssueContainer);
