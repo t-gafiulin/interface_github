@@ -7,6 +7,7 @@ import IssuesList from '../components/IssuesList';
 import BackButton from '../components/BackButton';
 import { LOAD_ISSUES_ERROR } from '../constants';
 import Error from '../components/Error';
+import Pagination from '../components/Pagination';
 
 class IssuesListContainer extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ class IssuesListContainer extends Component {
         this.state = {
             perPage: '30',
             page: +this.props.match.params.page || 1,
+            pages: 13,
         }
     }
 
@@ -32,13 +34,27 @@ class IssuesListContainer extends Component {
         const { fetchIssues } = this.props;
         let currentPage = this.state.page;
         if(nextOrPrevButton === 'next') {
-            fetchIssues(login, repository, ++(currentPage), this.state.perPage);
+            ++currentPage;
         } else if (nextOrPrevButton === 'prev') {
-            fetchIssues(login, repository, --(currentPage), this.state.perPage);
-        } else if (nextOrPrevButton === 'perPage') {
+            --currentPage;
+        } else if (nextOrPrevButton === 'first'){
             currentPage = 1;
-            fetchIssues(login, repository, currentPage, this.state.perPage);
-        } 
+        } else if (nextOrPrevButton === 'last') {
+            currentPage = this.state.pages;
+        } else {
+            currentPage = +nextOrPrevButton;
+        }
+
+
+
+        
+        
+        
+        // else if (nextOrPrevButton === 'perPage') {
+        //     currentPage = 1;
+        //     //fetchIssues(login, repository, currentPage, this.state.perPage);
+        // } 
+        fetchIssues(login, repository, currentPage, this.state.perPage);
 
         this.setState({page: currentPage});
     }
@@ -50,25 +66,12 @@ class IssuesListContainer extends Component {
         return loading ? <Loader /> :
         <div>
             <BackButton />
-            <div className='pagination'>
-                <button className='pagination__prev' onClick={() => this.handleClick('prev')} disabled={this.state.page === 1}>
-                    <Link 
-                        className='search__button' 
-                        to={`/${login}/${repository}/${this.state.page - 1}`}
-                    >
-                        Prev
-                    </Link>
-                </button>
-                    <span className='pagination__page'>{this.state.page}</span>
-                <button className='pagination__next' onClick={() => this.handleClick('next')} disabled={issues.length < this.state.perPage}>
-                    <Link 
-                        className='search__button' 
-                        to={`/${login}/${repository}/${this.state.page + 1}`}
-                    >
-                        Next
-                    </Link>
-                </button>
-            </div>
+
+            <Pagination 
+                pages={this.state.pages}
+                activePageNumber={this.state.page}
+                handleClick={this.handleClick}
+            />
 
             <select 
                 className='select-block'
