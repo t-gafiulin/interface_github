@@ -1,0 +1,10 @@
+.pagintaionButtons{
+    padding: 10px;
+    color: rgb(0, 107, 222);
+    background-color: white;
+}
+
+.active{
+    background-color: rgb(0, 107, 222);
+    color: white;
+}

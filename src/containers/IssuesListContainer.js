@@ -44,11 +44,6 @@ class IssuesListContainer extends Component {
         } else {
             currentPage = +nextOrPrevButton;
         }
-
-
-
-        
-        
         
         // else if (nextOrPrevButton === 'perPage') {
         //     currentPage = 1;
