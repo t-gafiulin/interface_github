@@ -30,13 +30,13 @@ class SearchContainer extends Component {
     }
 
     render(){
-        const { repositories, loadUserError, loadRepositoriesError } = this.props;
+        const { count_rep, loadUserError, loadRepositoriesError } = this.props;
 
         const errors = <div>
                 {loadUserError ? <Error type={LOAD_USER_ERROR} /> : 
                     loadRepositoriesError ? 
                         <Error type={LOAD_REPOSITORIES_ERROR} /> : 
-                        repositories.length === 0 ?
+                        count_rep === 0 ?
                             <Error type={USER_HAS_NOT_REPOSITORIES} /> : ''
                 }
             </div>
@@ -56,7 +56,7 @@ class SearchContainer extends Component {
 
 export default connect(
     state => ({
-        repositories: state.issue.repositories,
+        count_rep: state.issue.count_rep,
         loadUserError: state.issue.loadUserError,
         loadRepositoriesError: state.issue.loadRepositoriesError,
     }),

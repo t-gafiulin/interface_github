@@ -2,7 +2,6 @@ import {
     LOAD_ISSUES_ERROR, LOAD_ISSUES_REQUEST, LOAD_ISSUES_SUCCESS, 
     LOAD_ISSUE_SUCCESS, LOAD_ISSUE_ERROR, LOAD_ISSUE_REQUEST, 
     LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_ERROR,
-    LOAD_REPOSITORIES_ERROR, LOAD_REPOSITORIES_REQUEST, LOAD_REPOSITORIES_SUCCESS,
     LOAD_USER_ERROR, LOAD_USER_REQUEST, LOAD_USER_SUCCESS,
 } from '../constants/index';
 
@@ -29,10 +28,10 @@ function receiveComment ( json ) {
     }
 }
 
-function receiveRepositories ( json ) {
+function receiveReposCount ( json ) {
     return {
-        type: LOAD_REPOSITORIES_SUCCESS,
-        repositories: json,
+        type: LOAD_USER_SUCCESS,
+        count_rep: json.public_repos,
     }
 }
 
@@ -47,34 +46,11 @@ export function fetchUser(login){
         .then( 
             json => {
                 if(!json.message){
-                    dispatch({
-                        type: LOAD_USER_SUCCESS,
-                    })
-                    dispatch(fetchRepositories(login));
+                    dispatch(receiveReposCount(json));
                 }
                 else
                     dispatch({
                         type: LOAD_USER_ERROR,
-                    });
-            })
-    }
-}
-
-function fetchRepositories(login){
-    return function(dispatch){
-        dispatch({
-            type: LOAD_REPOSITORIES_REQUEST,
-        });
-
-        return fetch(`https://api.github.com/users/${login}/repos?per_page=200&client_id=83d15c2761e543bf26ff&client_secret=87fbe74939b37b342e080a59dfe0573632ea1881`)
-        .then( response => response.json())
-        .then( 
-            json => {
-                if(!json.message)
-                    dispatch(receiveRepositories( json ));
-                else
-                    dispatch({
-                        type: LOAD_REPOSITORIES_ERROR,
                     });
             })
     }
