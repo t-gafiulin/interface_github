@@ -17,7 +17,10 @@ const IssuesList = ({issues, login, repository}) => {
     }
     )
 
-    return <div>{issuesList}</div>;
+    return <div className='list-issue'>
+        <div className='list-issue-header'>Issues</div>
+        {issuesList}
+    </div>;
 }
 
 export default IssuesList;

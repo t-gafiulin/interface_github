@@ -73,14 +73,11 @@ class IssuesListContainer extends Component {
                 <option value="100">100</option>
             </select>
             {this.props.loadIssuesError ? <Error type={LOAD_ISSUES_ERROR} /> :
-            <div className='list-issue'>
-                <div className='list-issue-header'>Issues</div>
                 <IssuesList 
                     issues={issues} 
                     login={login}
                     repository={repository}
                 />
-            </div>
             }
         </div>
         ;
