@@ -7,6 +7,7 @@ import BackButton from '../components/BackButton';
 import { LOAD_ISSUES_ERROR } from '../constants';
 import Error from '../components/Error';
 import Pagination from '../components/Pagination';
+import SelectQuantity from '../components/SelectQuantity';
 
 class IssuesListContainer extends Component {
     constructor(props){
@@ -58,20 +59,13 @@ class IssuesListContainer extends Component {
                 login={login}
                 repository={repository}
             />
+            
+            <SelectQuantity 
+                perPage={this.state.perPage}
+                handleClick={this.handleClick}
+                handleChange={this.handleChange}
+            />
 
-            <select 
-                className='select-block'
-                value={this.state.perPage} 
-                onChange={(e) => this.handleChange('perPage', e)} 
-                onClick={() => this.handleClick('perPage')}
-            >
-                <option value="1">1</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
             {this.props.loadIssuesError ? <Error type={LOAD_ISSUES_ERROR} /> :
                 <IssuesList 
                     issues={issues} 
