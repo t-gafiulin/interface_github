@@ -1,21 +1,28 @@
-.pagintaionButtons{
-    padding: 10px;
-    color: rgb(0, 107, 222);
+.pagination-block{
+    border: 1px solid rgb(0, 107, 222);
+    border-right: none;
+}
+
+.pagination-block__button{
     background-color: white;
+    border: none;
+    border-right: 1px solid rgb(0, 107, 222);
+    padding: 5px 10px;
 }
 
-.pagintaionButtons a{
-    padding: 10px;
-}
-
-.pagintaionButtons a:hover{
-}
-
-.active{
+.pagination-block__button--active{
     background-color: rgb(0, 107, 222);
     color: white;
 }
 
-.active:hover{
+.pagination-block__link{
+    color: black;
+}
+
+.pagination-block__link--active{
+    color: white;
+}
+
+.pagination-block__link--active:hover{
     color: white;
 }

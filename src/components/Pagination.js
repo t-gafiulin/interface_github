@@ -9,54 +9,54 @@ export default class Pagination extends Component {
     }
 
     getPageButtons(pages, activePageNumber, handleClick, login, repository){
-        return <div>
+        return <div className='pagination-block'>
             <button 
-                className='firstPrevNextLast ' 
+                className='firstPrevNextLast pagination-block__button' 
                 disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, 1)}
             >
-                <Link to={`/${login}/${repository}/${1}`}>First</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${1}`}>First</Link>
             </button>
             <button 
-                className='firstPrevNextLast ' 
+                className='firstPrevNextLast pagination-block__button' 
                 disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, activePageNumber - 1)}
             >
-                <Link to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
             </button>
             <button 
-                className='' 
+                className='numbers pagination-block__button' 
                 onClick={handleClick.bind(null, activePageNumber - 1)}
                 hidden={activePageNumber <= 1}
             >
-                <Link to={`/${login}/${repository}/${activePageNumber - 1}`}>{activePageNumber - 1}</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>{activePageNumber - 1}</Link>
             </button>
             <button 
-                className='active' 
+                className='pagination-block__button pagination-block__button--active' 
                 onClick={handleClick.bind(null, activePageNumber)}
             >
-                <Link to={`/${login}/${repository}/${activePageNumber}`}>{activePageNumber}</Link>
+                <Link className='pagination-block__link pagination-block__link--active' to={`/${login}/${repository}/${activePageNumber}`}>{activePageNumber}</Link>
             </button>
             <button 
-                className='' 
+                className='pagination-block__button' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
                 hidden={activePageNumber >= pages}
             >
-                <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>{activePageNumber + 1}</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>{activePageNumber + 1}</Link>
             </button>
             <button 
-                className='firstPrevNextLast ' 
+                className='firstPrevNextLast pagination-block__button' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
                 disabled={activePageNumber >= pages}
             >
-                <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>
             </button>
             <button 
-                className='firstPrevNextLast ' 
+                className='firstPrevNextLast pagination-block__button' 
                 onClick={handleClick.bind(null, pages)}
                 disabled={activePageNumber >= pages}
             >
-                <Link to={`/${login}/${repository}/${pages}`}>Last</Link>
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>Last</Link>
             </button>
         </div>      
     }
@@ -66,7 +66,7 @@ export default class Pagination extends Component {
 
         let buttons = this.getPageButtons(pages, activePageNumber, handleClick, login, repository);
 
-        return <div className='pagintaionButtons'>
+        return <div className='pagination'>
             {buttons}
         </div>
     }
