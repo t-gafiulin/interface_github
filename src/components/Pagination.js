@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../resource/Pagination.css';
 
 
@@ -7,49 +8,63 @@ export default class Pagination extends Component {
         super(props);
     }
 
-    getPageButtons(pages, activePageNumber, handleClick){
+    getPageButtons(pages, activePageNumber, handleClick, login, repository){
         return <div>
             <button 
                 className='firstPrevNextLast ' 
                 disabled={activePageNumber === 1}
                 onClick={handleClick.bind(null, 1)}
-            >First</button>
+            >
+                <Link disabled={activePageNumber === 1} to={`/${login}/${repository}/${1}`}>First</Link>
+            </button>
             <button 
                 className='firstPrevNextLast ' 
                 disabled={activePageNumber === 1}
                 onClick={handleClick.bind(null, activePageNumber - 1)}
-            >Prev</button>
+            >
+                <Link disabled={activePageNumber === 1} to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
+            </button>
             <button 
                 className='' 
                 onClick={handleClick.bind(null, activePageNumber - 1)}
                 hidden={activePageNumber === 1}
-            >{activePageNumber - 1}</button>
+            >
+                <Link to={`/${login}/${repository}/${activePageNumber - 1}`}>{activePageNumber - 1}</Link>
+            </button>
             <button 
                 className='active' 
                 onClick={handleClick.bind(null, activePageNumber)}
-            >{activePageNumber}</button>
+            >
+                <Link to={`/${login}/${repository}/${activePageNumber}`}>{activePageNumber}</Link>
+            </button>
             <button 
                 className='' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
                 hidden={activePageNumber === pages}
-            >{activePageNumber + 1}</button>
+            >
+                <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>{activePageNumber + 1}</Link>
+            </button>
             <button 
                 className='firstPrevNextLast ' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
                 disabled={activePageNumber === pages}
-            >Next</button>
+            >
+                <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>
+            </button>
             <button 
                 className='firstPrevNextLast ' 
                 onClick={handleClick.bind(null, pages)}
                 disabled={activePageNumber === pages}
-            >Last</button>
+            >
+                <Link to={`/${login}/${repository}/${pages}`}>Last</Link>
+            </button>
         </div>      
     }
 
     render() {
-        const { pages, activePageNumber, handleClick } = this.props;
+        const { pages, activePageNumber, handleClick, login, repository } = this.props;
 
-        let buttons = this.getPageButtons(pages, activePageNumber, handleClick);
+        let buttons = this.getPageButtons(pages, activePageNumber, handleClick, login, repository);
 
         return <div className='pagintaionButtons'>
             {buttons}

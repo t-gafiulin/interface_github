@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchIssues } from '../AC';
-import { Link } from 'react-router-dom';
 import Loader from '../components/LoadingIndicator';
 import IssuesList from '../components/IssuesList';
 import BackButton from '../components/BackButton';
@@ -56,6 +55,8 @@ class IssuesListContainer extends Component {
                 pages={this.state.pages}
                 activePageNumber={this.state.page}
                 handleClick={this.handleClick}
+                login={login}
+                repository={repository}
             />
 
             <select 
