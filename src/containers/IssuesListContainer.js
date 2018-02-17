@@ -33,17 +33,7 @@ class IssuesListContainer extends Component {
         const { login, repository } = this.props.match.params;
         const { fetchIssues } = this.props;
         let currentPage = this.state.page;
-        if(nextOrPrevButton === 'next') {
-            ++currentPage;
-        } else if (nextOrPrevButton === 'prev') {
-            --currentPage;
-        } else if (nextOrPrevButton === 'first'){
-            currentPage = 1;
-        } else if (nextOrPrevButton === 'last') {
-            currentPage = this.state.pages;
-        } else {
-            currentPage = +nextOrPrevButton;
-        }
+        currentPage = +nextOrPrevButton;    
         
         // else if (nextOrPrevButton === 'perPage') {
         //     currentPage = 1;

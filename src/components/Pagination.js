@@ -26,7 +26,8 @@ export default class Pagination extends Component {
             >{activePageNumber - 1}</button>
             <button 
                 className='active' 
-                onClick={handleClick.bind(null, activePageNumber)}>{activePageNumber}</button>
+                onClick={handleClick.bind(null, activePageNumber)}
+            >{activePageNumber}</button>
             <button 
                 className='' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
