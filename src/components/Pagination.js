@@ -12,22 +12,22 @@ export default class Pagination extends Component {
         return <div>
             <button 
                 className='firstPrevNextLast ' 
-                disabled={activePageNumber === 1}
+                disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, 1)}
             >
-                <Link disabled={activePageNumber === 1} to={`/${login}/${repository}/${1}`}>First</Link>
+                <Link to={`/${login}/${repository}/${1}`}>First</Link>
             </button>
             <button 
                 className='firstPrevNextLast ' 
-                disabled={activePageNumber === 1}
+                disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, activePageNumber - 1)}
             >
-                <Link disabled={activePageNumber === 1} to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
+                <Link to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
             </button>
             <button 
                 className='' 
                 onClick={handleClick.bind(null, activePageNumber - 1)}
-                hidden={activePageNumber === 1}
+                hidden={activePageNumber <= 1}
             >
                 <Link to={`/${login}/${repository}/${activePageNumber - 1}`}>{activePageNumber - 1}</Link>
             </button>
@@ -40,21 +40,21 @@ export default class Pagination extends Component {
             <button 
                 className='' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
-                hidden={activePageNumber === pages}
+                hidden={activePageNumber >= pages}
             >
                 <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>{activePageNumber + 1}</Link>
             </button>
             <button 
                 className='firstPrevNextLast ' 
                 onClick={handleClick.bind(null, activePageNumber + 1)}
-                disabled={activePageNumber === pages}
+                disabled={activePageNumber >= pages}
             >
                 <Link to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>
             </button>
             <button 
                 className='firstPrevNextLast ' 
                 onClick={handleClick.bind(null, pages)}
-                disabled={activePageNumber === pages}
+                disabled={activePageNumber >= pages}
             >
                 <Link to={`/${login}/${repository}/${pages}`}>Last</Link>
             </button>
