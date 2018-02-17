@@ -15,14 +15,22 @@ export default class Pagination extends Component {
                 disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, 1)}
             >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${1}`}>First</Link>
+            {
+                activePageNumber > 1 ? 
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${1}`}>First</Link> :
+                'First'
+            }
             </button>
             <button 
                 className='firstPrevNextLast pagination-block__button' 
                 disabled={activePageNumber <= 1}
                 onClick={handleClick.bind(null, activePageNumber - 1)}
             >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link>
+            {
+                activePageNumber > 1 ? 
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link> :
+                'Prev'
+            }
             </button>
             <button 
                 className='numbers pagination-block__button' 
@@ -49,14 +57,22 @@ export default class Pagination extends Component {
                 onClick={handleClick.bind(null, activePageNumber + 1)}
                 disabled={activePageNumber >= pages}
             >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>
+            {
+                activePageNumber < pages ? 
+                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>:
+                'Next'
+            }
             </button>
             <button 
                 className='firstPrevNextLast pagination-block__button' 
                 onClick={handleClick.bind(null, pages)}
                 disabled={activePageNumber >= pages}
             >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>Last</Link>
+                {
+                    activePageNumber < pages ? 
+                        <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>Last</Link> :
+                        'Last'
+                }
             </button>
         </div>      
     }
