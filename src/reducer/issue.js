@@ -3,6 +3,7 @@ import {
     LOAD_ISSUE_SUCCESS, LOAD_ISSUE_ERROR, LOAD_ISSUE_REQUEST, 
     LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_ERROR,
     LOAD_USER_ERROR, LOAD_USER_REQUEST, LOAD_USER_SUCCESS,
+    LOAD_ISSUES_COUNT_SUCCESS,
 } from '../constants/index';
 
 const initialState = {
@@ -20,12 +21,13 @@ const initialState = {
     comments: [],
     loadingIssues: true,
     count_rep: -1,
+    issuesCount: 1,
 }
 
 export default function issue(state = initialState, action){
     switch(action.type){
         case LOAD_ISSUES_SUCCESS:
-            const {issues, login, repositoryName} = action;
+            const {issues, login, repositoryName, perPage} = action;
             return {
                 ...state,
                 issues: issues,
@@ -85,6 +87,11 @@ export default function issue(state = initialState, action){
             return {
                 ...state,
                 loadUserError: true,
+            }
+        case LOAD_ISSUES_COUNT_SUCCESS:
+            return {
+                ...state,
+                issuesCount: action.issuesCount,
             }
         default:
             return state;

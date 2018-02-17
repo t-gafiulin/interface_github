@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchIssues } from '../AC';
+import { fetchIssues, fetchIssuesCount } from '../AC';
 import Loader from '../components/LoadingIndicator';
 import IssuesList from '../components/IssuesList';
 import BackButton from '../components/BackButton';
@@ -15,13 +15,13 @@ class IssuesListContainer extends Component {
         this.state = {
             perPage: '30',
             page: +this.props.match.params.page || 1,
-            pages: 13,
         }
     }
 
     componentWillMount(){
         const { login, repository } = this.props.match.params;
-        this.props.fetchIssues(login, repository, this.state.page, this.state.perPage);   
+        this.props.fetchIssuesCount(login, repository);
+        this.props.fetchIssues(login, repository, this.state.page, this.state.perPage); 
     }
 
     handleChange = (stateName, event) => {
@@ -31,13 +31,13 @@ class IssuesListContainer extends Component {
     handleClick = (nextOrPrevButton) => {
         const { login, repository } = this.props.match.params;
         const { fetchIssues } = this.props;
-        let currentPage = this.state.page;
-        currentPage = +nextOrPrevButton;    
-        
-        // else if (nextOrPrevButton === 'perPage') {
-        //     currentPage = 1;
-        //     //fetchIssues(login, repository, currentPage, this.state.perPage);
-        // } 
+        let currentPage = this.state.page;   
+
+        if (nextOrPrevButton === 'perPage') {
+            currentPage = 1;
+        } else {
+            currentPage = +nextOrPrevButton; 
+        }
         fetchIssues(login, repository, currentPage, this.state.perPage);
 
         this.setState({page: currentPage});
@@ -45,14 +45,14 @@ class IssuesListContainer extends Component {
 
     render(){
         const { login, repository } = this.props.match.params;
-        const { issues, loading } = this.props;
+        const { issues, loading, issuesCount } = this.props;
 
         return loading ? <Loader /> :
         <div>
             <BackButton />
 
             <Pagination 
-                pages={this.state.pages}
+                pages={Math.ceil(issuesCount/this.state.perPage)}
                 activePageNumber={this.state.page}
                 handleClick={this.handleClick}
                 login={login}
@@ -90,9 +90,10 @@ class IssuesListContainer extends Component {
 export default connect(
     state => ({
         issues: state.issue.issues,
+        issuesCount: state.issue.issuesCount,
         loading: state.issue.loadingIssues,
         loadIssuesError: state.issue.loadIssuesError,
     }),
-    { fetchIssues }
+    { fetchIssues, fetchIssuesCount }
 )(IssuesListContainer);
 
