@@ -8,6 +8,11 @@
     border: none;
     border-right: 1px solid rgb(0, 107, 222);
     padding: 5px 10px;
+    cursor: pointer;
+}
+
+.pagination-block__button:hover{
+    color: rgb(0, 107, 222);
 }
 
 .pagination-block__button--active{
@@ -15,14 +20,11 @@
     color: white;
 }
 
-.pagination-block__link{
-    color: black;
+.pagination-block__button--disabled:hover{
+    color: rgb(128, 128, 128);
+    cursor: default;
 }
 
-.pagination-block__link--active{
-    color: white;
-}
-
-.pagination-block__link--active:hover{
+.pagination-block__button--active:hover{
     color: white;
 }

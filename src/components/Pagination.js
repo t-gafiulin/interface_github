@@ -10,70 +10,69 @@ export default class Pagination extends Component {
 
     getPageButtons(pages, activePageNumber, handleClick, login, repository){
         return <div className='pagination-block'>
-            <button 
-                className='firstPrevNextLast pagination-block__button' 
-                disabled={activePageNumber <= 1}
-                onClick={handleClick.bind(null, 1)}
-            >
-            {
-                activePageNumber > 1 ? 
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${1}`}>First</Link> :
-                'First'
-            }
-            </button>
-            <button 
-                className='firstPrevNextLast pagination-block__button' 
-                disabled={activePageNumber <= 1}
-                onClick={handleClick.bind(null, activePageNumber - 1)}
-            >
-            {
-                activePageNumber > 1 ? 
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>Prev</Link> :
-                'Prev'
-            }
-            </button>
-            <button 
-                className='numbers pagination-block__button' 
-                onClick={handleClick.bind(null, activePageNumber - 1)}
-                hidden={activePageNumber <= 1}
-            >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>{activePageNumber - 1}</Link>
-            </button>
-            <button 
-                className='pagination-block__button pagination-block__button--active' 
-                onClick={handleClick.bind(null, activePageNumber)}
-            >
-                <Link className='pagination-block__link pagination-block__link--active' to={`/${login}/${repository}/${activePageNumber}`}>{activePageNumber}</Link>
-            </button>
-            <button 
-                className='pagination-block__button' 
-                onClick={handleClick.bind(null, activePageNumber + 1)}
-                hidden={activePageNumber >= pages}
-            >
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>{activePageNumber + 1}</Link>
-            </button>
-            <button 
-                className='firstPrevNextLast pagination-block__button' 
-                onClick={handleClick.bind(null, activePageNumber + 1)}
-                disabled={activePageNumber >= pages}
-            >
-            {
-                activePageNumber < pages ? 
-                <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>Next</Link>:
-                'Next'
-            }
-            </button>
-            <button 
-                className='firstPrevNextLast pagination-block__button' 
-                onClick={handleClick.bind(null, pages)}
-                disabled={activePageNumber >= pages}
-            >
-                {
-                    activePageNumber < pages ? 
-                        <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>Last</Link> :
-                        'Last'
-                }
-            </button>
+
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${1}`}>
+                <button 
+                    className={`firstPrevNextLast pagination-block__button ${activePageNumber <= 1 ? 'pagination-block__button--disabled': ''}`}
+                    disabled={activePageNumber <= 1}
+                    onClick={handleClick.bind(null, 1)}
+                >
+                    First
+                </button>
+            </Link>
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>
+                <button 
+                    className={`firstPrevNextLast pagination-block__button ${activePageNumber <= 1 ? 'pagination-block__button--disabled': ''}`}
+                    disabled={activePageNumber <= 1}
+                    onClick={handleClick.bind(null, activePageNumber - 1)}
+                >
+                    Prev
+                </button>
+            </Link>
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>
+                <button 
+                    className='numbers pagination-block__button' 
+                    onClick={handleClick.bind(null, activePageNumber - 1)}
+                    hidden={activePageNumber <= 1}
+                >
+                    {activePageNumber - 1}
+                </button>
+            </Link>
+            <Link className='pagination-block__link pagination-block__link--active' to={`/${login}/${repository}/${activePageNumber}`}>
+                <button 
+                    className='pagination-block__button pagination-block__button--active' 
+                    onClick={handleClick.bind(null, activePageNumber)}
+                >
+                    {activePageNumber}
+                </button>
+            </Link>
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>
+                <button 
+                    className='pagination-block__button' 
+                    onClick={handleClick.bind(null, activePageNumber + 1)}
+                    hidden={activePageNumber >= pages}
+                >
+                    {activePageNumber + 1}
+                </button>
+            </Link>
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>
+                <button 
+                    className={`firstPrevNextLast pagination-block__button ${activePageNumber >= pages ? 'pagination-block__button--disabled': ''}`}
+                    onClick={handleClick.bind(null, activePageNumber + 1)}
+                    disabled={activePageNumber >= pages}
+                >
+                    Next
+                </button>
+            </Link>
+            <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>
+                <button 
+                    className={`firstPrevNextLast pagination-block__button ${activePageNumber >= pages ? 'pagination-block__button--disabled': ''}`}
+                    onClick={handleClick.bind(null, pages)}
+                    disabled={activePageNumber >= pages}
+                >
+                    Last
+                </button>
+            </Link>
         </div>      
     }
 
