@@ -85,7 +85,7 @@ export default connect(
     state => ({
         issues: state.issue.issues,
         issuesCount: state.issue.issuesCount,
-        loading: state.issue.loadingIssues,
+        loading: state.issue.issuesLoading,
         loadIssuesError: state.issue.loadIssuesError,
     }),
     { fetchIssues, fetchIssuesCount }

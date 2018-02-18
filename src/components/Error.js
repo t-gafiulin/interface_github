@@ -4,7 +4,6 @@ import {
     LOAD_REPOSITORIES_ERROR,
     LOAD_USER_ERROR,
     LOAD_ISSUE_ERROR,
-    LOAD_COMMENTS_ERROR,
     USER_HAS_NOT_REPOSITORIES,
     
 } from '../constants/index';
@@ -23,9 +22,6 @@ const Error = ({type}) => {
             break;
         case LOAD_ISSUE_ERROR:
             error_message = "This issue doesn't exist";
-            break;
-        case LOAD_COMMENTS_ERROR:
-            error_message = "This issue haven't comments";
             break;
         case USER_HAS_NOT_REPOSITORIES:
             error_message = "This user hasn't any repositories";

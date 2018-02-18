@@ -17,9 +17,9 @@ const initialState = {
     loadUserError: false,
     loadCommentsError: false,
     issue: null,
-    issueLoad: true,
+    issueLoading: true,
     comments: [],
-    loadingIssues: true,
+    issuesLoading: true,
     count_rep: -1,
     issuesCount: 1,
 }
@@ -33,32 +33,32 @@ export default function issue(state = initialState, action){
                 issues: issues,
                 login: login,
                 repositoryName: repositoryName,
-                loadingIssues: false,
+                issuesLoading: false,
                 loadIssuesError: false,
             } 
         case LOAD_ISSUES_REQUEST:
             return {
                 ...state,
-                loadingIssues: true,
+                issuesLoading: true,
                 loadIssuesError: false,
             }
         case LOAD_ISSUES_ERROR:
             return {
                 ...state,
-                loadingIssues: false,
+                issuesLoading: false,
                 loadIssuesError: true,
             }
         case LOAD_ISSUE_SUCCESS:
             return {
                 ...state,
                 issue: action.issue,
-                issueLoad: false,
+                issueLoading: false,
                 loadIssueError: false
             }
         case LOAD_ISSUE_REQUEST:
             return {
                 ...state,
-                issueLoad: true,
+                issueLoading: true,
                 loadIssueError: false,
             }
         case LOAD_ISSUE_ERROR:

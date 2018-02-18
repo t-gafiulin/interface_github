@@ -32,7 +32,7 @@ class IssueContainer extends Component {
 export default connect(
     state => ({
         issue: state.issue.issue,
-        loading: state.issue.issueLoad,
+        loading: state.issue.issueLoading,
         comments: state.issue.comments,
         loadIssueError: state.issue.loadIssueError,
     }),
