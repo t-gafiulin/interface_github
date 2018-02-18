@@ -14,7 +14,7 @@ class IssuesListContainer extends Component {
         super(props);
 
         this.state = {
-            perPage: '30',
+            perPage: '1',
             page: +this.props.match.params.page || 1,
         }
     }
@@ -48,13 +48,18 @@ class IssuesListContainer extends Component {
         const { login, repository } = this.props.match.params;
         const { issues, loading, issuesCount } = this.props;
 
+        if(this.state.page > Math.ceil(issuesCount/this.state.perPage)){
+            this.setState({page: 1});
+            this.props.fetchIssues(login, repository, 1, this.state.perPage);
+        }
+
         return loading ? <Loader /> :
         <div>
             <BackButton />
 
             <Pagination 
                 pages={Math.ceil(issuesCount/this.state.perPage)}
-                activePageNumber={this.state.page}
+                activePageNumber={this.state.page > issuesCount ? '1' : this.state.page}
                 handleClick={this.handleClick}
                 login={login}
                 repository={repository}
