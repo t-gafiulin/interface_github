@@ -8,6 +8,7 @@ import { LOAD_ISSUES_ERROR } from '../constants';
 import Error from '../components/Error';
 import Pagination from '../components/Pagination';
 import SelectQuantity from '../components/SelectQuantity';
+import { Link } from 'react-router-dom';
 
 class IssuesListContainer extends Component {
     constructor(props){
@@ -48,38 +49,35 @@ class IssuesListContainer extends Component {
         const { login, repository } = this.props.match.params;
         const { issues, loading, issuesCount } = this.props;
 
-        if(this.state.page > Math.ceil(issuesCount/this.state.perPage)){
-            this.setState({page: 1});
-            this.props.fetchIssues(login, repository, 1, this.state.perPage);
-        }
+        return loading ? <Loader /> : 
+                    this.state.page > issuesCount ? <Error type={LOAD_ISSUES_ERROR} /> :
+                        <div>
+                            <BackButton />
 
-        return loading ? <Loader /> :
-        <div>
-            <BackButton />
+                            <Pagination 
+                                pages={Math.ceil(issuesCount/this.state.perPage)}
+                                activePageNumber={this.state.page}
+                                handleClick={this.handleClick}
+                                login={login}
+                                repository={repository}
+                            />
+                            
+                            <Link to={`/${login}/${repository}/1`}>
+                                <SelectQuantity 
+                                    perPage={this.state.perPage}
+                                    handleClick={this.handleClick}
+                                    handleChange={this.handleChange}
+                                />
+                            </Link>
 
-            <Pagination 
-                pages={Math.ceil(issuesCount/this.state.perPage)}
-                activePageNumber={this.state.page > issuesCount ? '1' : this.state.page}
-                handleClick={this.handleClick}
-                login={login}
-                repository={repository}
-            />
-            
-            <SelectQuantity 
-                perPage={this.state.perPage}
-                handleClick={this.handleClick}
-                handleChange={this.handleChange}
-            />
-
-            {this.props.loadIssuesError ? <Error type={LOAD_ISSUES_ERROR} /> :
-                <IssuesList 
-                    issues={issues} 
-                    login={login}
-                    repository={repository}
-                />
-            }
-        </div>
-        ;
+                            {this.props.loadIssuesError ? <Error type={LOAD_ISSUES_ERROR} /> :
+                                <IssuesList 
+                                    issues={issues} 
+                                    login={login}
+                                    repository={repository}
+                                />
+                            }
+                        </div>;
     }
 }
 

@@ -13,7 +13,7 @@ const Error = ({type}) => {
     let error_message;
     switch(type){
         case LOAD_ISSUES_ERROR:
-            error_message = "This issue doesn't exist";
+            error_message = "This page of issues doesn't exist";
             break;
         case LOAD_USER_ERROR:
             error_message = "This user doesn't exist";
