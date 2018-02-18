@@ -21,7 +21,7 @@ export default class Issue extends Component {
         let src, author_url, author_name, body_issue, comments_amount, created_at, labels;
 
         const data = <Loader />; 
-        const { loading, issue, commentsList } = this.props;
+        const { loading, issue, commentsList, login, repository } = this.props;
         
         if(!loading) {
             src = issue.user.avatar_url;
@@ -55,7 +55,7 @@ export default class Issue extends Component {
             <div className='container'>
                 <div className='issue-body'>
                     <div className='issue-header-show'>
-                        <BackButton />
+                        <BackButton path={`/${login}/${repository}`} />
                         <h1 className='issue-header-show__title'>
                             <span className='issue-header-show__text-header'>{issue.title}</span>
                             <span className='issue-header-show__number'> #{issue.number}</span>

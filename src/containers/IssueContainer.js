@@ -18,6 +18,7 @@ class IssueContainer extends Component {
 
     render(){
         const { loading, issue, comments, loadIssueError } = this.props;
+        const { login, repository } = this.props.match.params;
 
         return loading ? <Loader /> :
                     loadIssueError ? <Error type={LOAD_ISSUE_ERROR} /> :
@@ -25,6 +26,8 @@ class IssueContainer extends Component {
                         loading={loading}
                         issue={issue}
                         commentsList={comments}
+                        login={login}
+                        repository={repository}
                     />
     }
 }

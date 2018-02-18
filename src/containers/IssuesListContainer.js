@@ -52,7 +52,7 @@ class IssuesListContainer extends Component {
         return loading ? <Loader /> : 
                     this.state.page > issuesCount ? <Error type={LOAD_ISSUES_ERROR} /> :
                         <div>
-                            <BackButton />
+                            <BackButton path={'/'} />
 
                             <Pagination 
                                 pages={Math.ceil(issuesCount/this.state.perPage)}

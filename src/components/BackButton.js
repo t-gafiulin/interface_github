@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BackButton = () => {
+const BackButton = ({path}) => {
+    console.log(path);
     return <div className='back-button'>
-        <Link to="/"><button>Back</button></Link>
+        <Link to={path}><button>Back</button></Link>
     </div>;
 }
 
