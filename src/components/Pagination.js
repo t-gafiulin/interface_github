@@ -15,7 +15,7 @@ export default class Pagination extends Component {
                 <button 
                     className={`firstPrevNextLast pagination-block__button ${activePageNumber <= 1 ? 'pagination-block__button--disabled': ''}`}
                     disabled={activePageNumber <= 1}
-                    onClick={handleClick.bind(null, 1)}
+                    onClick={() => handleClick(1)}
                 >
                     First
                 </button>
@@ -24,7 +24,7 @@ export default class Pagination extends Component {
                 <button 
                     className={`firstPrevNextLast pagination-block__button ${activePageNumber <= 1 ? 'pagination-block__button--disabled': ''}`}
                     disabled={activePageNumber <= 1}
-                    onClick={handleClick.bind(null, activePageNumber - 1)}
+                    onClick={() => handleClick(activePageNumber - 1)}
                 >
                     Prev
                 </button>
@@ -32,7 +32,7 @@ export default class Pagination extends Component {
             <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber - 1}`}>
                 <button 
                     className='numbers pagination-block__button' 
-                    onClick={handleClick.bind(null, activePageNumber - 1)}
+                    onClick={() => handleClick(activePageNumber - 1)}
                     hidden={activePageNumber <= 1}
                 >
                     {activePageNumber - 1}
@@ -41,7 +41,7 @@ export default class Pagination extends Component {
             <Link className='pagination-block__link pagination-block__link--active' to={`/${login}/${repository}/${activePageNumber}`}>
                 <button 
                     className='pagination-block__button pagination-block__button--active' 
-                    onClick={handleClick.bind(null, activePageNumber)}
+                    onClick={() => handleClick(activePageNumber)}
                 >
                     {activePageNumber}
                 </button>
@@ -49,7 +49,7 @@ export default class Pagination extends Component {
             <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>
                 <button 
                     className='pagination-block__button' 
-                    onClick={handleClick.bind(null, activePageNumber + 1)}
+                    onClick={() => handleClick(activePageNumber + 1)}
                     hidden={activePageNumber >= pages}
                 >
                     {activePageNumber + 1}
@@ -58,7 +58,7 @@ export default class Pagination extends Component {
             <Link className='pagination-block__link' to={`/${login}/${repository}/${activePageNumber + 1}`}>
                 <button 
                     className={`firstPrevNextLast pagination-block__button ${activePageNumber >= pages ? 'pagination-block__button--disabled': ''}`}
-                    onClick={handleClick.bind(null, activePageNumber + 1)}
+                    onClick={() => handleClick(activePageNumber + 1)}
                     disabled={activePageNumber >= pages}
                 >
                     Next
@@ -67,7 +67,7 @@ export default class Pagination extends Component {
             <Link className='pagination-block__link' to={`/${login}/${repository}/${pages}`}>
                 <button 
                     className={`firstPrevNextLast pagination-block__button ${activePageNumber >= pages ? 'pagination-block__button--disabled': ''}`}
-                    onClick={handleClick.bind(null, pages)}
+                    onClick={() => handleClick(pages)}
                     disabled={activePageNumber >= pages}
                 >
                     Last
