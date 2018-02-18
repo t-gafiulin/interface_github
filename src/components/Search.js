@@ -16,9 +16,13 @@ const Search = ({login, repository, handleFocus, handleChange}) => {
                     onFocus={handleFocus}
                     onChange={(e) => handleChange('repository', e)} 
                     placeholder='Repository name'/>
-                <Link 
-                    className='search__button' 
-                    to={`/${login}/${repository}`}>Search</Link> 
+                { login && repository ?
+                    <Link to={`/${login}/${repository}`}>
+                        <button className='search__button'>  
+                            Search
+                        </button>
+                    </Link> : ''
+                }
             </div>
         </div>;
 }
